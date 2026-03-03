@@ -6,6 +6,8 @@
 
 @layer base {
   :root {
+    --sky-400: #38bdf8;
+    --sky-500: #0ea5e9;
     --background: 0 0% 100%;
     --foreground: 222 47% 11%;
 
@@ -53,6 +55,8 @@
   }
 
   .dark {
+    --sky-400: #38bdf8;
+    --sky-500: #0ea5e9;
     --background: 222 56% 11%;
     --foreground: 210 40% 96%;
 
@@ -99,7 +103,12 @@
     font-family: 'Inter', system-ui, sans-serif;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
   }
 }
@@ -176,15 +185,91 @@
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes subtle-float {
+
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+
+  50% {
+    transform: translateY(-8px) translateX(4px);
+  }
+}
+
+.animate-subtle-float {
+  animation: subtle-float 6s ease-in-out infinite;
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px hsla(var(--solby-blue), 0.3); }
-  50% { box-shadow: 0 0 40px hsla(var(--solby-blue), 0.6); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px hsla(var(--solby-blue), 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 40px hsla(var(--solby-blue), 0.6);
+  }
 }
 
 .btn-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@layer utilities {
+  .wave-container {
+    position: absolute;
+    width: 200%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .wave-shape {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: repeat-x;
+    background-position: bottom;
+    background-size: 50% 100%;
+  }
+
+  .wave-1 {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 320' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%233b5bf5' fill-opacity='0.1' d='M0,160L48,170.7C96,181,192,203,288,197.3C384,192,480,160,576,149.3C672,139,768,149,864,170.7C960,192,1056,224,1152,229.3C1248,235,1344,213,1392,202.7L1440,192V320H1392C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320H0V160Z'/%3E%3C/svg%3E");
+    opacity: 0.6;
+  }
+
+  .wave-2 {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 320' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%2360a5fa' fill-opacity='0.1' d='M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,202.7C1248,181,1344,171,1392,165.3L1440,160V320H1392C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320H0V224Z'/%3E%3C/svg%3E");
+    opacity: 0.5;
+    bottom: -20px;
+  }
+
+  .wave-3 {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 320' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%2393c5fd' fill-opacity='0.1' d='M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,218.7C672,203,768,149,864,138.7C960,128,1056,160,1152,165.3C1248,171,1344,149,1392,138.7L1440,128V320H1392C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320H0V96Z'/%3E%3C/svg%3E");
+    opacity: 0.4;
+    bottom: -40px;
+  }
+
+  .circle-pattern {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+  }
 }

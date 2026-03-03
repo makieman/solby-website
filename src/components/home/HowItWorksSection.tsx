@@ -32,7 +32,11 @@ const HowItWorksSection = () => {
   }, [active]);
 
   return (
-    <section className="section-padding bg-muted/50 relative">
+    <section className="pt-2 pb-20 relative bg-[#f8fafc] dark:bg-[#0f172a] overflow-hidden">
+      {/* Seamless grid pattern from previous section */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#334155_1px,transparent_1px),linear-gradient(to_bottom,#334155_1px,transparent_1px)] [background-size:40px_40px] opacity-[0.4] dark:opacity-[0.15]"></div>
+      </div>
       <div className="container-custom">
         <SectionWrapper className="text-center mb-16">
           <span className="text-xs font-semibold tracking-widest uppercase text-primary">Process</span>
@@ -49,16 +53,14 @@ const HowItWorksSection = () => {
               <button
                 key={i}
                 onClick={() => setActive(i)}
-                className={`w-full text-left p-6 rounded-xl border transition-all duration-300 ${
-                  i === active
-                    ? "border-primary bg-card shadow-lg scale-[1.02]"
-                    : "border-border bg-card/50 hover:border-primary/30"
-                }`}
+                className={`w-full text-left p-6 rounded-xl border transition-all duration-300 ${i === active
+                  ? "border-primary bg-card shadow-lg scale-[1.02]"
+                  : "border-border bg-card/50 hover:border-primary/30"
+                  }`}
               >
                 <div className="flex items-center gap-3 mb-2">
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold ${
-                    i === active ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
-                  }`}>
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold ${i === active ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
+                    }`}>
                     {i + 1}
                   </div>
                   <h3 className="font-heading font-bold text-foreground">{step.title}</h3>

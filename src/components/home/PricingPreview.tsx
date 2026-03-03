@@ -55,20 +55,19 @@ const PricingPreview = () => {
 
         {/* Cycle toggle */}
         <div className="flex justify-center mb-12">
-          <div className="inline-flex bg-muted rounded-xl p-1 gap-1">
+          <div className="inline-flex flex-wrap md:flex-nowrap bg-muted rounded-xl p-1 gap-1">
             {cycles.map((c) => (
               <button
                 key={c.key}
                 onClick={() => setCycle(c.key)}
-                className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                  cycle === c.key
-                    ? "bg-primary text-primary-foreground shadow-md"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
+                className={`flex items-center gap-2 px-3 py-2 md:px-4 md:py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap ${cycle === c.key
+                  ? "bg-accent text-accent-foreground shadow-md"
+                  : "text-muted-foreground hover:text-foreground"
+                  }`}
               >
-                {c.label}
+                <span>{c.label}</span>
                 {c.badge && (
-                  <span className="absolute -top-2 -right-2 text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-accent text-accent-foreground">
+                  <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-accent text-accent-foreground leading-none">
                     {c.badge}
                   </span>
                 )}
@@ -80,9 +79,8 @@ const PricingPreview = () => {
         <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
           {plans.map((plan, i) => (
             <SectionWrapper key={plan.name} delay={i * 0.1}>
-              <div className={`relative bg-card border rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl h-full flex flex-col ${
-                plan.popular ? "border-primary ring-2 ring-primary/20" : "border-border"
-              }`}>
+              <div className={`relative bg-card border rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl h-full flex flex-col ${plan.popular ? "border-primary ring-2 ring-primary/20" : "border-border"
+                }`}>
                 {plan.popular && (
                   <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 text-xs font-bold rounded-full bg-primary text-primary-foreground">
                     Most Popular
@@ -104,11 +102,10 @@ const PricingPreview = () => {
                 </ul>
                 <Link
                   to="/pricing"
-                  className={`mt-6 w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all group ${
-                    plan.popular
-                      ? "bg-primary text-primary-foreground hover:opacity-90"
-                      : "border border-border text-foreground hover:bg-muted"
-                  }`}
+                  className={`mt-6 w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all group ${plan.popular
+                    ? "bg-primary text-primary-foreground hover:opacity-90"
+                    : "border border-border text-foreground hover:bg-muted"
+                    }`}
                 >
                   Get Started
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

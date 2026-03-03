@@ -61,8 +61,6 @@ const App = () => (
             </Suspense>
           </main>
           <Footer />
-          <ScrollToTopButton />
-          <WhatsAppButton />
           <CookieConsent />
         </BrowserRouter>
       </TooltipProvider>

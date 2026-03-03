@@ -1,6 +1,8 @@
 import { Briefcase, Store, Utensils, Construction, Heart, Truck, Check, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import SectionWrapper from "@/components/SectionWrapper";
+import heroImg from "@/assets/industries_hero.png";
 
 const coreSolutions = [
   {
@@ -82,18 +84,81 @@ const industries = [
 
 const Industries = () => (
   <>
-    {/* Hero */}
-    <section className="relative pt-32 pb-20 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-solby-black to-solby-blue-dark" />
-      <div className="absolute inset-0 bg-solby-blue/20" />
-      <div className="container-custom relative z-10 text-center">
-        <SectionWrapper>
-          <h1 className="heading-xl text-white mb-4">Industries We Serve</h1>
-          <p className="text-lg text-white/70 max-w-2xl mx-auto">
-            Solby powers businesses across every industry with purpose-built solutions.
-          </p>
-        </SectionWrapper>
+    {/* Hero - Full viewport with background image */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <img
+          src={heroImg}
+          alt="Industries background"
+          className="w-full h-full object-cover opacity-60 dark:opacity-40"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/70 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-r from-solby-blue/20 via-transparent to-solby-green/20" />
       </div>
+
+      {/* Ambient glows */}
+      <div className="absolute top-1/4 right-1/4 w-[400px] h-[400px] bg-solby-blue/20 rounded-full blur-[120px]" />
+      <div className="absolute bottom-1/4 left-1/4 w-[300px] h-[300px] bg-solby-green/20 rounded-full blur-[100px]" />
+
+      <div className="container-custom relative z-10 text-center py-20">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20 mb-6">
+            Trusted by businesses across Africa
+          </span>
+        </motion.div>
+
+        <h1 className="heading-xl text-foreground mb-6">
+          {"Industries We Serve".split(" ").map((word, i) => (
+            <span key={i} className="inline-block mr-4">
+              {word.split("").map((char, j) => (
+                <motion.span
+                  key={j}
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    delay: (i * 5 + j) * 0.05 + 0.3,
+                    duration: 1.2,
+                    ease: [0.2, 0.65, 0.3, 0.9]
+                  }}
+                  style={{ display: 'inline-block' }}
+                >
+                  {char}
+                </motion.span>
+              ))}
+            </span>
+          ))}
+        </h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.8 }}
+          className="text-lg text-muted-foreground max-w-2xl mx-auto"
+        >
+          Solby powers businesses across every industry with purpose-built solutions.
+        </motion.p>
+      </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+      >
+        <div className="w-6 h-10 rounded-full border-2 border-foreground/30 flex justify-center pt-2">
+          <motion.div
+            animate={{ y: [0, 12, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5 }}
+            className="w-1.5 h-1.5 rounded-full bg-foreground/60"
+          />
+        </div>
+      </motion.div>
     </section>
 
     {/* Core Solutions */}

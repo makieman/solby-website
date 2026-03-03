@@ -1,4 +1,5 @@
 import SectionWrapper from "@/components/SectionWrapper";
+import { Marquee } from "@/components/ui/marquee";
 
 const logos = [
   { name: "Forever Grateful", url: "https://res.cloudinary.com/dzorbbb7s/image/upload/v1748783889/fg_logo_fg-1-removebg-preview_hrmztq.webp" },
@@ -21,23 +22,43 @@ const ClientLogosSection = () => (
         </p>
       </SectionWrapper>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {logos.map((logo, i) => (
-          <SectionWrapper key={logo.name} delay={i * 0.05}>
-            <div className="group bg-card border border-border rounded-xl p-6 flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer">
+      <div className="relative flex flex-col items-center justify-center -mx-4 sm:-mx-6 lg:-mx-8">
+        <Marquee pauseOnHover speed={40} className="py-2">
+          {logos.map((logo) => (
+            <div
+              key={logo.name}
+              className="group mx-4 sm:mx-8 bg-card border border-border rounded-xl p-4 sm:p-6 flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer min-w-[160px] sm:min-w-[200px]"
+            >
               <img
                 src={logo.url}
                 alt={logo.name}
-                className="h-16 w-auto object-contain dark:brightness-90"
+                className="h-12 w-auto sm:h-16 object-contain dark:brightness-90"
                 loading="lazy"
               />
-              <span className="text-xs font-medium text-muted-foreground group-hover:text-primary transition-colors relative">
-                {logo.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
-              </span>
             </div>
-          </SectionWrapper>
-        ))}
+          ))}
+        </Marquee>
+
+        {/* Optional reverse row if there are many logos, repeating the same ones just for depth */}
+        <Marquee pauseOnHover speed={50} direction="right" className="py-2">
+          {[...logos].reverse().map((logo) => (
+            <div
+              key={`rev-${logo.name}`}
+              className="group mx-4 sm:mx-8 bg-card border border-border rounded-xl p-4 sm:p-6 flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer min-w-[160px] sm:min-w-[200px]"
+            >
+              <img
+                src={logo.url}
+                alt={logo.name}
+                className="h-12 w-auto sm:h-16 object-contain dark:brightness-90"
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </Marquee>
+
+        {/* Gradient fades for the edges */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background dark:from-background to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-background dark:from-background to-transparent" />
       </div>
 
       <p className="text-center text-sm text-muted-foreground mt-10">
