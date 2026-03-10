@@ -3,6 +3,7 @@ import { Mail, Phone, MapPin, Clock, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import SectionWrapper from "@/components/SectionWrapper";
+import { WovenLightBackground } from "@/components/ui/woven-light-hero";
 
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
@@ -34,8 +35,11 @@ const Contact = () => {
   return (
     <>
       <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-solby-black to-solby-blue-dark" />
-        <div className="absolute inset-0 bg-solby-blue/20" />
+        <div className="absolute inset-0 z-0">
+          <WovenLightBackground className="absolute inset-0 opacity-80" overlayClassName="absolute top-0 right-0 h-full w-1/2 opacity-20 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-br from-solby-black/80 via-solby-blue-dark/75 to-solby-black/85" />
+          <div className="absolute inset-0 bg-solby-blue/15" />
+        </div>
         <div className="container-custom relative z-10 text-center">
           <SectionWrapper>
             <h1 className="heading-xl text-white mb-4">Get in Touch</h1>
@@ -101,22 +105,33 @@ const Contact = () => {
             <SectionWrapper delay={0.2}>
               <div className="space-y-6">
                 {[
-                  { icon: Mail, title: "Email", value: "info@solby.io", href: "mailto:info@solby.io" },
-                  { icon: Phone, title: "Phone", value: "+254 115 588872", href: "tel:+254115588872" },
-                  { icon: MapPin, title: "Office", value: "Karen Mosque, Langata Road, Nairobi, Kenya" },
-                  { icon: Clock, title: "Business Hours", value: "Monday – Friday: 8:00 AM – 6:00 PM EAT" },
-                ].map(({ icon: Icon, title, value, href }) => (
+                  { icon: Mail, title: "Email", info: [{ value: "info@solby.io", href: "mailto:info@solby.io" }] },
+                  {
+                    icon: Phone,
+                    title: "Phone",
+                    info: [
+                      { value: "+254 115 588872", href: "tel:+254115588872" },
+                      { value: "+254 100 933316", href: "tel:+254100933316" }
+                    ]
+                  },
+                  { icon: MapPin, title: "Office", info: [{ value: "Eldoret Eastern Avenue" }] },
+                  { icon: Clock, title: "Business Hours", info: [{ value: "Monday – Friday: 8:00 AM – 6:00 PM EAT" }] },
+                ].map(({ icon: Icon, title, info }) => (
                   <div key={title} className="flex items-start gap-4 p-5 bg-card border border-border rounded-xl">
                     <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                       <Icon className="w-5 h-5 text-primary" />
                     </div>
                     <div>
                       <h3 className="font-heading font-semibold text-foreground">{title}</h3>
-                      {href ? (
-                        <a href={href} className="text-sm text-muted-foreground hover:text-primary transition-colors">{value}</a>
-                      ) : (
-                        <p className="text-sm text-muted-foreground">{value}</p>
-                      )}
+                      <div className="flex flex-col gap-1 mt-1">
+                        {info.map((item, idx) => (
+                          item.href ? (
+                            <a key={idx} href={item.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">{item.value}</a>
+                          ) : (
+                            <p key={idx} className="text-sm text-muted-foreground">{item.value}</p>
+                          )
+                        ))}
+                      </div>
                     </div>
                   </div>
                 ))}

@@ -9,7 +9,6 @@ const Footer = () => {
       <footer className="bg-[#0a1120] text-gray-300 pt-10 pb-12 relative z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
-
             {/* Company Info */}
             <div className="lg:col-span-5 space-y-6">
               <Link to="/" className="flex items-center gap-2 text-white">
@@ -94,11 +93,14 @@ const Footer = () => {
                 </li>
                 <li className="flex items-start gap-3 group">
                   <Phone className="w-5 h-5 mt-0.5 text-[#1a3ee8] group-hover:text-blue-400 transition-colors shrink-0" />
-                  <a href="tel:+254115588872" className="hover:text-white transition-colors">+254 115 588872</a>
+                  <div className="flex flex-col gap-1">
+                    <a href="tel:+254115588872" className="hover:text-white transition-colors">+254 115 588872</a>
+                    <a href="tel:+254100933316" className="hover:text-white transition-colors">+254 100 933316</a>
+                  </div>
                 </li>
                 <li className="flex items-start gap-3 group">
                   <MapPin className="w-5 h-5 mt-0.5 text-[#1a3ee8] group-hover:text-blue-400 transition-colors shrink-0" />
-                  <span className="leading-relaxed">Karen Mosque, Langata Road,<br />Nairobi, Kenya</span>
+                  <span className="leading-relaxed">Eldoret Eastern Avenue</span>
                 </li>
               </ul>
             </div>
