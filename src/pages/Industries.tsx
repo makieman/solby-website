@@ -120,7 +120,7 @@ const Industries = () => (
     </section>
 
     <section className="sticky top-[72px] z-30 border-y border-border/60 bg-background/88 py-3 supports-[backdrop-filter]:backdrop-blur-xl">
-      <div className="container-custom max-w-6xl">
+      <div className="container-custom">
         <div className="flex flex-wrap justify-center gap-2">
           {industries.map((industry) => (
             <a
@@ -137,7 +137,7 @@ const Industries = () => (
 
     {/* Core Solutions */}
     <section className="py-14 md:py-16">
-      <div className="container-custom max-w-6xl">
+      <div className="container-custom">
         <SectionWrapper className="mb-8 text-center">
           <span className="text-xs font-semibold tracking-widest uppercase text-primary">Our Products</span>
           <h2 className="heading-lg mt-3 text-foreground">Solby's Core Solutions</h2>
@@ -171,7 +171,7 @@ const Industries = () => (
     {/* Industry Sections */}
     {industries.map((ind, i) => (
       <section key={ind.id} id={ind.id} className={`${i % 2 === 0 ? "bg-muted/50" : "bg-background"} scroll-mt-36 py-12 md:py-14`}>
-        <div className="container-custom max-w-6xl">
+        <div className="container-custom">
           <SectionWrapper>
             <div className="grid gap-7 lg:grid-cols-2 lg:gap-9">
               <div>

@@ -76,7 +76,7 @@ const PricingPreview = () => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {plans.map((plan, i) => (
             <SectionWrapper key={plan.name} delay={i * 0.1}>
               <div className={`relative bg-card border rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl h-full flex flex-col ${plan.popular ? "border-primary ring-2 ring-primary/20" : "border-border"

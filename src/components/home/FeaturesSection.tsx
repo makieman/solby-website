@@ -46,7 +46,7 @@ const FeaturesSection = () => (
     </div>
 
     <div className="container-custom relative z-10">
-      <div className="mx-auto w-full max-w-6xl">
+      <div className="relative">
         <SectionWrapper className="text-center section-heading-spacing max-w-3xl mx-auto">
           <span className="text-xs font-semibold tracking-widest uppercase text-primary">Powerful Features</span>
           <h2 className="heading-lg mt-3 text-foreground">Everything Your Business Needs</h2>

@@ -97,7 +97,7 @@ export function Header() {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.45, ease: 'easeOut' }}
-        className="pointer-events-auto mx-auto mt-3 w-[calc(100%-1rem)] max-w-4xl px-2 sm:mt-4 sm:w-[calc(100%-2rem)]"
+        className="pointer-events-auto mx-auto mt-3 w-full max-w-7xl px-4 sm:mt-4 sm:px-6 md:px-[80px]"
       >
         <div
           className={cn(
@@ -136,7 +136,7 @@ export function Header() {
               </div>
             </div>
 
-              <div className="hidden items-center gap-2 lg:flex">
+            <div className="hidden items-center gap-2 lg:flex">
               <Button
                 variant="ghost"
                 size="icon"

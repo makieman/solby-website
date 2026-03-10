@@ -196,7 +196,7 @@ const Pricing = () => {
 
       {/* Plans */}
       <section className="py-14 md:py-16">
-        <div className="container-custom max-w-6xl">
+        <div className="container-custom">
           {activeCategory === "custom" ? (
             <SectionWrapper>
               <div className="mx-auto max-w-2xl rounded-2xl border-2 border-primary bg-card p-6 text-center md:p-8">
@@ -267,7 +267,7 @@ const Pricing = () => {
 
       {/* Add-ons */}
       <section className="bg-muted/50 py-14 md:py-16">
-        <div className="container-custom max-w-6xl">
+        <div className="container-custom">
           <SectionWrapper className="mb-10 text-center">
             <span className="text-xs font-semibold tracking-widest uppercase text-primary">Power-ups</span>
             <h2 className="heading-lg mt-3 text-foreground">Optional Add-ons</h2>
@@ -306,7 +306,7 @@ const Pricing = () => {
 
       {/* FAQ */}
       <section className="py-14 md:py-16">
-        <div className="container-custom max-w-6xl">
+        <div className="container-custom">
           <SectionWrapper className="mb-10 text-center">
             <h2 className="heading-lg text-foreground">Frequently Asked Questions</h2>
             <p className="mt-4 text-muted-foreground">Have questions about our pricing? We've got answers.</p>
