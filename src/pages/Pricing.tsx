@@ -134,7 +134,7 @@ const Pricing = () => {
             <span className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20 mb-6">
               Sell Your Dream.
             </span>
-            <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-foreground md:text-5xl lg:text-6xl">Flexible Pricing for Every Stage of Business</h1>
+            <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-foreground md:text-6xl lg:text-7xl">Flexible Pricing for Every Stage of Business</h1>
             <p className="mx-auto max-w-2xl text-base text-muted-foreground md:text-lg">
               From small kiosks to full-scale enterprises — choose the right Solby product for your business.
             </p>
@@ -151,11 +151,17 @@ const Pricing = () => {
                 <button
                   key={c.key}
                   onClick={() => setCycle(c.key)}
-                  className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all ${cycle === c.key ? "bg-primary text-primary-foreground shadow-md" : "text-muted-foreground hover:text-foreground"
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap ${cycle === c.key
+                    ? "bg-accent text-accent-foreground shadow-md"
+                    : "text-muted-foreground hover:text-foreground"
                     }`}
                 >
-                  {c.label}
-                  {c.badge && <span className="absolute -top-2 -right-2 text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-accent text-accent-foreground">{c.badge}</span>}
+                  <span>{c.label}</span>
+                  {c.badge && (
+                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-accent text-accent-foreground leading-none">
+                      {c.badge}
+                    </span>
+                  )}
                 </button>
               ))}
             </div>

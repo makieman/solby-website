@@ -68,6 +68,14 @@ export default {
           green: "#10B981",
           black: "#0F172A",
         },
+        brand: "hsl(var(--brand))",
+        "brand-foreground": "hsl(var(--brand-foreground))",
+      },
+      maxWidth: {
+        container: "80rem",
+      },
+      boxShadow: {
+        glow: "0 -16px 128px 0 hsla(var(--brand-foreground) / 0.5) inset, 0 -16px 32px 0 hsla(var(--brand) / 0.5) inset",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -96,6 +104,34 @@ export default {
         },
         "marquee-reverse": {
           to: { transform: "translateX(50%)" },
+        },
+        "fade-in-up": {
+          "0%": {
+            opacity: "0",
+            transform: "translateY(10px)"
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translateY(0)"
+          }
+        },
+        "fade-in": {
+          "0%": {
+            opacity: "0"
+          },
+          "100%": {
+            opacity: "1"
+          }
+        },
+        "scale-in": {
+          "0%": {
+            opacity: "0",
+            transform: "scale(0.95)"
+          },
+          "100%": {
+            opacity: "1",
+            transform: "scale(1)"
+          }
         }
       },
       animation: {
@@ -106,6 +142,9 @@ export default {
         breathing: "breathing 6s ease-in-out infinite",
         marquee: "marquee var(--duration, 30s) linear infinite",
         "marquee-reverse": "marquee-reverse var(--duration, 30s) linear infinite",
+        "fade-in-up": "fade-in-up 0.5s ease-out forwards",
+        "fade-in": "fade-in 0.5s ease-out forwards",
+        "scale-in": "scale-in 0.5s ease-out forwards"
       },
     },
   },

@@ -4,7 +4,7 @@ import HowItWorksSection from "@/components/home/HowItWorksSection";
 import ClientLogosSection from "@/components/home/ClientLogosSection";
 import TestimonialSlider from "@/components/home/TestimonialSlider";
 import PricingPreview from "@/components/home/PricingPreview";
-import { CtaCard } from "@/components/ui/cta-card";
+import { CTASection } from "@/components/ui/cta-with-rectangle";
 
 const Index = () => (
   <>
@@ -14,9 +14,18 @@ const Index = () => (
     <ClientLogosSection />
     <TestimonialSlider />
     <PricingPreview />
-    <section className="relative py-2 md:py-4 pb-12 md:pb-16 bg-muted/50 overflow-hidden">
-      <div className="relative z-10">
-        <CtaCard />
+    <section className="relative bg-muted/50 overflow-hidden">
+      <div className="container-custom relative z-10">
+        <CTASection
+          badge={{ text: "Ready to Scale?" }}
+          title="Transform Your Business Today"
+          description="Join 800+ businesses running leaner and growing faster with Solby's all-in-one ecosystem."
+          action={{
+            text: "Get Started Now",
+            href: "/contact",
+            variant: "glow"
+          }}
+        />
       </div>
 
       {/* Breathing SVG Bottom transition to footer */}

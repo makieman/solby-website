@@ -52,6 +52,9 @@
     --solby-blue-dark: 235 76% 45%;
     --solby-green: 160 84% 39%;
     --solby-black: 222 56% 11%;
+
+    --brand: 235 100% 57%;
+    --brand-foreground: 160 84% 39%;
   }
 
   .dark {
@@ -90,6 +93,9 @@
     --solby-blue-dark: 235 76% 50%;
     --solby-green: 160 84% 39%;
     --solby-black: 222 56% 11%;
+
+    --brand: 235 100% 62%;
+    --brand-foreground: 160 84% 39%
   }
 }
 
@@ -163,8 +169,11 @@
 
   .container-custom {
     width: 100%;
-    margin: 0 10px;
-    padding: 0 1.5rem;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 
   .heading-xl {
@@ -180,11 +189,43 @@
   }
 
   .section-padding {
-    @apply py-24;
+    @apply py-12;
   }
 
   .section-heading-spacing {
-    @apply mb-12;
+    @apply mb-6;
+  }
+
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+
+  .delay-500 {
+    animation-delay: 500ms;
+  }
+
+  .delay-700 {
+    animation-delay: 700ms;
+  }
+
+  .fade-top-lg {
+    mask-image: linear-gradient(to bottom,
+        transparent,
+        rgba(0, 0, 0, 1) 8rem);
+  }
+
+  .animate-in {
+    animation-duration: 1000ms;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
   }
 }
 

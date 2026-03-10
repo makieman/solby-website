@@ -66,7 +66,7 @@ export const WovenLightHero = () => {
             <WovenLightBackground />
 
             <div className="relative z-10 mx-auto w-full max-w-4xl px-4 pt-16 text-center pointer-events-none">
-                <h1 className="text-4xl md:text-6xl lg:text-7xl text-foreground font-bold tracking-tight" style={{ textShadow: '0 0 22px rgba(59, 130, 246, 0.16)' }}>
+                <h1 className="text-4xl md:text-6xl lg:text-7xl text-foreground font-extrabold tracking-tight" style={{ textShadow: '0 0 22px rgba(59, 130, 246, 0.16)' }}>
                     {headline.split(" ").map((word, i) => (
                         <span key={i} className="inline-block">
                             {word.split("").map((char, j) => (

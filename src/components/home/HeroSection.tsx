@@ -47,20 +47,20 @@ const HeroSection = () => {
   const slide = slides[current];
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
+    <section className="relative min-h-[85vh] flex items-center overflow-hidden pt-12">
       {/* Background */}
       <div className="absolute inset-0 mesh-grid" />
       <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-solby-blue/10 rounded-full blur-[120px]" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-solby-green/10 rounded-full blur-[100px]" />
 
-      <div className="container-custom relative z-10 py-16">
+      <div className="container-custom relative z-10 py-8">
         <div className="grid lg:grid-cols-[1fr_1.15fr] gap-14 items-center">
 
           {/* ── Left col ── */}
           <div>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20 mb-6">
-                ⚡ Introducing our next-gen Enterprise Software
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20 mb-6 font-inter">
+                Introducing our next-gen Enterprise Software
               </span>
             </motion.div>
 
@@ -93,7 +93,7 @@ const HeroSection = () => {
 
             {/* CTAs */}
             <div className="flex flex-wrap gap-3 mb-8">
-              <Link to="/contact" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold bg-primary text-primary-foreground btn-pulse-glow hover:opacity-90 transition-opacity group">
+              <Link to="/contact" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold bg-gradient-to-r from-solby-blue to-solby-blue-dark text-primary-foreground shadow-md shadow-solby-blue/20 hover:shadow-lg hover:shadow-solby-blue/30 hover:-translate-y-0.5 transition-all duration-300 group">
                 Get Started
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
@@ -126,7 +126,7 @@ const HeroSection = () => {
           </div>
 
           {/* ── Right col — hero photo ── */}
-          <div className="hidden lg:flex relative h-[600px] group items-start justify-end self-start mt-12">
+          <div className="hidden lg:flex relative h-[600px] group items-start justify-end self-start mt-6">
             {/* ambient glow */}
             <div className="absolute inset-0 bg-gradient-to-br from-solby-blue/15 via-transparent to-solby-green/15 rounded-3xl blur-3xl z-0" />
 

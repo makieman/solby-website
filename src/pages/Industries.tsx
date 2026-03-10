@@ -103,7 +103,7 @@ const Industries = () => (
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8, ease: 'easeOut' }}
-          className="mb-4 text-4xl font-extrabold tracking-tight text-foreground md:text-5xl lg:text-6xl"
+          className="mb-4 text-4xl font-extrabold tracking-tight text-foreground md:text-6xl lg:text-7xl"
         >
           Industries We Serve
         </motion.h1>

@@ -58,33 +58,33 @@ const FeaturesSection = () => (
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4 items-stretch">
           {features.map((f, i) => (
             <SectionWrapper key={f.title} delay={i * 0.1} className="h-full">
-            <div className="group relative bg-white/70 dark:bg-slate-800/70 backdrop-blur-md rounded-2xl p-6 border border-white/50 dark:border-white/10 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden h-full flex flex-col">
-              <div className="absolute top-0 left-0 w-full h-1 opacity-0 group-hover:opacity-100 transition-opacity" style={{ background: `linear-gradient(to right, ${f.color}80, ${f.color})` }}></div>
-              <div className="flex justify-between items-start mb-4">
-                <div className="p-2.5 rounded-xl group-hover:scale-110 transition-transform duration-300" style={{ backgroundColor: `${f.color}15`, color: f.color }}>
-                  <f.icon className="w-5 h-5" />
+              <div className="group relative bg-white/95 dark:bg-slate-800/70 backdrop-blur-md rounded-2xl p-6 border border-white/50 dark:border-white/10 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden h-full flex flex-col">
+                <div className="absolute top-0 left-0 w-full h-1 opacity-0 group-hover:opacity-100 transition-opacity" style={{ background: `linear-gradient(to right, ${f.color}80, ${f.color})` }}></div>
+                <div className="flex justify-between items-start mb-4">
+                  <div className="p-2.5 rounded-xl group-hover:scale-110 transition-transform duration-300" style={{ backgroundColor: `${f.color}15`, color: f.color }}>
+                    <f.icon className="w-5 h-5" />
+                  </div>
+                  <span className="text-[11px] font-bold tracking-widest uppercase mt-1" style={{ color: `${f.color}CC` }}>
+                    {f.subtitle}
+                  </span>
                 </div>
-                <span className="text-[11px] font-bold tracking-widest uppercase mt-1" style={{ color: `${f.color}CC` }}>
-                  {f.subtitle}
-                </span>
+                <h3 className="text-[17px] font-bold text-slate-900 dark:text-white mb-2">{f.title}</h3>
+                <p className="text-[13px] text-slate-600 dark:text-slate-400 mb-4 leading-relaxed flex-1">
+                  {f.description}
+                </p>
+                <ul className="space-y-2 mb-4">
+                  {f.bullets.map((b) => (
+                    <li key={b} className="flex items-center text-[13px] text-slate-600 dark:text-slate-300">
+                      <Sparkles className="w-3.5 h-3.5 mr-2 shrink-0" style={{ color: f.color }} />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+                <a href="/features" className="inline-flex items-center text-[13px] font-semibold transition-colors group/link mt-auto" style={{ color: f.color }}>
+                  Learn more
+                  <ArrowRight className="w-3.5 h-3.5 ml-1 transform group-hover/link:translate-x-1 transition-transform" />
+                </a>
               </div>
-              <h3 className="text-[17px] font-bold text-slate-900 dark:text-white mb-2">{f.title}</h3>
-              <p className="text-[13px] text-slate-600 dark:text-slate-400 mb-4 leading-relaxed flex-1">
-                {f.description}
-              </p>
-              <ul className="space-y-2 mb-4">
-                {f.bullets.map((b) => (
-                  <li key={b} className="flex items-center text-[13px] text-slate-600 dark:text-slate-300">
-                    <Sparkles className="w-3.5 h-3.5 mr-2 shrink-0" style={{ color: f.color }} />
-                    {b}
-                  </li>
-                ))}
-              </ul>
-              <a href="/features" className="inline-flex items-center text-[13px] font-semibold transition-colors group/link mt-auto" style={{ color: f.color }}>
-                Learn more
-                <ArrowRight className="w-3.5 h-3.5 ml-1 transform group-hover/link:translate-x-1 transition-transform" />
-              </a>
-            </div>
             </SectionWrapper>
           ))}
         </div>

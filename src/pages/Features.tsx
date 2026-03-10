@@ -59,7 +59,7 @@ const Features = () => (
 
     {/* Feature groups styled with Glassmorphism / Stitch inspiration */}
     {groups.map((group, index) => (
-      <section key={group.title} className={`relative overflow-hidden py-20 ${index % 2 !== 0 ? 'bg-muted/40' : 'bg-background'}`}>
+      <section key={group.title} className={`relative overflow-hidden py-20 ${index % 2 !== 0 ? 'bg-muted/80 dark:bg-muted/40' : 'bg-background'}`}>
         <div className="container-custom relative z-10 max-w-6xl">
 
           <div className={`mb-16 flex flex-col items-center gap-10 lg:flex-row ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>

@@ -54,7 +54,7 @@ const PricingPreview = () => {
         </SectionWrapper>
 
         {/* Cycle toggle */}
-        <div className="flex justify-center mb-12">
+        <div className="flex justify-center mb-6">
           <div className="inline-flex flex-wrap md:flex-nowrap bg-muted rounded-xl p-1 gap-1">
             {cycles.map((c) => (
               <button
@@ -115,7 +115,7 @@ const PricingPreview = () => {
           ))}
         </div>
 
-        <div className="text-center mt-10">
+        <div className="text-center mt-6">
           <Link to="/pricing" className="inline-flex items-center gap-2 text-primary font-semibold hover:underline group">
             See all plans
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
