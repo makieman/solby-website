@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Check, ArrowRight, Plug, Smartphone, Wrench, HelpCircle } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
+import { WovenLightBackground } from "@/components/ui/woven-light-hero";
 
 const cycles = [
   { key: "monthly", label: "Monthly", mult: 1, discount: 0 },
@@ -125,16 +126,16 @@ const Pricing = () => {
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-solby-black to-solby-blue-dark" />
-        <div className="absolute inset-0 bg-solby-blue/20" />
-        <div className="container-custom relative z-10 text-center">
+      <section className="relative flex h-[54vh] min-h-[400px] w-full items-center justify-center overflow-hidden bg-background">
+        <WovenLightBackground />
+
+        <div className="container-custom relative z-10 py-10 text-center">
           <SectionWrapper>
-            <span className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold bg-white/10 text-white border border-white/20 mb-6">
+            <span className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20 mb-6">
               Sell Your Dream.
             </span>
-            <h1 className="heading-xl text-white mb-4">Flexible Pricing for Every Stage of Business</h1>
-            <p className="text-lg text-white/70 max-w-2xl mx-auto">
+            <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-foreground md:text-5xl lg:text-6xl">Flexible Pricing for Every Stage of Business</h1>
+            <p className="mx-auto max-w-2xl text-base text-muted-foreground md:text-lg">
               From small kiosks to full-scale enterprises — choose the right Solby product for your business.
             </p>
           </SectionWrapper>
@@ -142,17 +143,16 @@ const Pricing = () => {
       </section>
 
       {/* Billing toggle */}
-      <section className="py-8">
+      <section className="py-6">
         <div className="container-custom">
-          <div className="flex justify-center mb-6">
+          <div className="mb-4 flex justify-center">
             <div className="inline-flex bg-muted rounded-xl p-1 gap-1 flex-wrap justify-center">
               {cycles.map((c) => (
                 <button
                   key={c.key}
                   onClick={() => setCycle(c.key)}
-                  className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                    cycle === c.key ? "bg-primary text-primary-foreground shadow-md" : "text-muted-foreground hover:text-foreground"
-                  }`}
+                  className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all ${cycle === c.key ? "bg-primary text-primary-foreground shadow-md" : "text-muted-foreground hover:text-foreground"
+                    }`}
                 >
                   {c.label}
                   {c.badge && <span className="absolute -top-2 -right-2 text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-accent text-accent-foreground">{c.badge}</span>}
@@ -164,25 +164,23 @@ const Pricing = () => {
       </section>
 
       {/* Category tabs */}
-      <div className="sticky top-16 z-20 bg-background/90 backdrop-blur-md border-b border-border">
-        <div className="container-custom py-3">
+      <div className="sticky top-[72px] z-20 border-b border-border bg-background/90 backdrop-blur-md">
+        <div className="container-custom py-2.5">
           <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium transition-all shrink-0 ${
-                  activeCategory === cat.id ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground hover:text-foreground"
-                }`}
+                className={`whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium transition-all shrink-0 ${activeCategory === cat.id ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground hover:text-foreground"
+                  }`}
               >
                 {cat.title}
               </button>
             ))}
             <button
               onClick={() => setActiveCategory("custom")}
-              className={`whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium transition-all shrink-0 ${
-                activeCategory === "custom" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground hover:text-foreground"
-              }`}
+              className={`whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium transition-all shrink-0 ${activeCategory === "custom" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground hover:text-foreground"
+                }`}
             >
               Custom Solutions
             </button>
@@ -191,14 +189,14 @@ const Pricing = () => {
       </div>
 
       {/* Plans */}
-      <section className="section-padding">
-        <div className="container-custom">
+      <section className="py-14 md:py-16">
+        <div className="container-custom max-w-6xl">
           {activeCategory === "custom" ? (
             <SectionWrapper>
-              <div className="max-w-2xl mx-auto bg-card border-2 border-primary rounded-2xl p-8 text-center">
-                <h3 className="heading-lg text-foreground mb-4">Get a Quote</h3>
-                <p className="text-muted-foreground mb-6">Tailored enterprise solutions designed for unique business requirements.</p>
-                <ul className="grid sm:grid-cols-2 gap-2 text-left mb-8">
+              <div className="mx-auto max-w-2xl rounded-2xl border-2 border-primary bg-card p-6 text-center md:p-8">
+                <h3 className="heading-lg mb-4 text-foreground">Get a Quote</h3>
+                <p className="mb-6 text-muted-foreground">Tailored enterprise solutions designed for unique business requirements.</p>
+                <ul className="mb-7 grid gap-2 text-left sm:grid-cols-2">
                   {["Tailored feature set", "Industry-specific modifications", "Legacy system integration", "Custom API development", "Dedicated support team", "Personalized training", "Custom deployment options", "Compliance customization", "Bespoke reporting"].map((f) => (
                     <li key={f} className="flex items-center gap-2 text-sm text-muted-foreground">
                       <Check className="w-4 h-4 text-primary shrink-0" />
@@ -214,18 +212,17 @@ const Pricing = () => {
             </SectionWrapper>
           ) : (
             <>
-              <SectionWrapper className="text-center mb-4">
+              <SectionWrapper className="mb-4 text-center">
                 <h2 className="heading-lg text-foreground">{currentCategory.title}</h2>
                 <p className="text-muted-foreground mt-2">{currentCategory.description}</p>
                 <p className="text-xs text-muted-foreground mt-2">Ideal for: {currentCategory.idealFor}</p>
               </SectionWrapper>
 
-              <div className={`grid gap-6 mt-10 ${currentCategory.plans.length >= 3 ? "md:grid-cols-3" : currentCategory.plans.length === 2 ? "md:grid-cols-2 max-w-3xl mx-auto" : "max-w-md mx-auto"}`}>
+              <div className={`mt-8 grid gap-5 ${currentCategory.plans.length >= 3 ? "md:grid-cols-3" : currentCategory.plans.length === 2 ? "md:grid-cols-2 max-w-3xl mx-auto" : "max-w-md mx-auto"}`}>
                 {currentCategory.plans.map((plan, i) => (
                   <SectionWrapper key={plan.name} delay={i * 0.1}>
-                    <div className={`relative bg-card border rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl h-full flex flex-col ${
-                      plan.popular ? "border-primary ring-2 ring-primary/20" : "border-border"
-                    }`}>
+                    <div className={`relative flex h-full flex-col rounded-2xl border bg-card p-5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg ${plan.popular ? "border-primary ring-2 ring-primary/20" : "border-border"
+                      }`}>
                       {plan.popular && <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 text-xs font-bold rounded-full bg-primary text-primary-foreground">Most Popular</span>}
                       {plan.comingSoon && <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 text-xs font-bold rounded-full bg-yellow-500 text-white">Coming Soon</span>}
                       <h3 className="font-heading font-bold text-lg text-foreground">{plan.name}</h3>
@@ -234,8 +231,8 @@ const Pricing = () => {
                         <span className="text-sm text-muted-foreground">/{activeCycle.key === "monthly" ? "mo" : activeCycle.label.toLowerCase()}</span>
                       </div>
                       {plan.setupFee > 0 && <p className="text-xs text-muted-foreground mt-1">Setup fee: ${plan.setupFee}</p>}
-                      <ul className="mt-6 space-y-3 flex-1">
-                        {plan.features.map((f) => (
+                      <ul className="mt-5 flex-1 space-y-2.5">
+                        {plan.features.slice(0, 5).map((f) => (
                           <li key={f} className="flex items-start gap-2 text-sm text-muted-foreground">
                             <Check className="w-4 h-4 text-accent shrink-0 mt-0.5" />
                             {f}
@@ -244,13 +241,12 @@ const Pricing = () => {
                       </ul>
                       <button
                         disabled={plan.disabled}
-                        className={`mt-6 w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-                          plan.disabled
-                            ? "bg-muted text-muted-foreground cursor-not-allowed"
-                            : plan.popular
-                              ? "bg-primary text-primary-foreground hover:opacity-90"
-                              : "border border-border text-foreground hover:bg-muted"
-                        }`}
+                        className={`mt-5 flex w-full items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition-all ${plan.disabled
+                          ? "bg-muted text-muted-foreground cursor-not-allowed"
+                          : plan.popular
+                            ? "bg-primary text-primary-foreground hover:opacity-90"
+                            : "border border-border text-foreground hover:bg-muted"
+                          }`}
                       >
                         {plan.comingSoon ? "Coming Soon" : "Get Started"}
                       </button>
@@ -264,9 +260,9 @@ const Pricing = () => {
       </section>
 
       {/* Add-ons */}
-      <section className="section-padding bg-muted/50">
-        <div className="container-custom">
-          <SectionWrapper className="text-center mb-12">
+      <section className="bg-muted/50 py-14 md:py-16">
+        <div className="container-custom max-w-6xl">
+          <SectionWrapper className="mb-10 text-center">
             <span className="text-xs font-semibold tracking-widest uppercase text-primary">Power-ups</span>
             <h2 className="heading-lg mt-3 text-foreground">Optional Add-ons</h2>
             <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
@@ -274,7 +270,7 @@ const Pricing = () => {
             </p>
           </SectionWrapper>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid gap-5 md:grid-cols-3">
             {[
               { name: "eTIMS Integration", tag: "Compliance", icon: Plug, color: "#2431FF", desc: "Stay KRA-compliant with seamless Kenya Revenue Authority eTIMS integration built right into your workflow.", price: "One-time setup: USD 100 OR Monthly add-on: USD 10/mo" },
               { name: "M-Pesa & STK Push", tag: "Payments", icon: Smartphone, color: "#10B981", desc: "Accept mobile money payments instantly. Customers get an STK push prompt — no manual reconciliation needed.", price: "One-time setup: USD 40" },
@@ -283,7 +279,7 @@ const Pricing = () => {
               <SectionWrapper key={addon.name} delay={i * 0.1}>
                 <div className="bg-card border border-border rounded-2xl overflow-hidden h-full">
                   <div className="h-1 w-full" style={{ backgroundColor: addon.color }} />
-                  <div className="p-6">
+                  <div className="p-5">
                     <span className="text-xs font-semibold px-2 py-1 rounded-full" style={{ backgroundColor: `${addon.color}15`, color: addon.color }}>{addon.tag}</span>
                     <div className="flex items-center gap-3 mt-4 mb-3">
                       <addon.icon className="w-5 h-5" style={{ color: addon.color }} />
@@ -296,24 +292,24 @@ const Pricing = () => {
               </SectionWrapper>
             ))}
           </div>
-          <p className="text-center text-sm text-muted-foreground mt-8">
+          <p className="mt-7 text-center text-sm text-muted-foreground">
             All add-ons are optional and can be added or removed at any time. <Link to="/contact" className="text-primary hover:underline">Contact us</Link> for a custom quote.
           </p>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <SectionWrapper className="text-center mb-12">
+      <section className="py-14 md:py-16">
+        <div className="container-custom max-w-6xl">
+          <SectionWrapper className="mb-10 text-center">
             <h2 className="heading-lg text-foreground">Frequently Asked Questions</h2>
             <p className="mt-4 text-muted-foreground">Have questions about our pricing? We've got answers.</p>
           </SectionWrapper>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="mx-auto grid max-w-4xl gap-5 md:grid-cols-2">
             {faqs.map((faq, i) => (
               <SectionWrapper key={i} delay={i * 0.05}>
-                <div className="bg-card border border-border rounded-xl p-6">
+                <div className="rounded-xl border border-border bg-card p-5">
                   <div className="flex items-start gap-3">
                     <HelpCircle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                     <div>
@@ -326,8 +322,8 @@ const Pricing = () => {
             ))}
           </div>
 
-          <div className="text-center mt-10">
-            <p className="text-muted-foreground mb-4">Not sure which plan fits your business?</p>
+          <div className="mt-8 text-center">
+            <p className="mb-4 text-muted-foreground">Not sure which plan fits your business?</p>
             <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-3 rounded-lg font-semibold bg-primary text-primary-foreground hover:opacity-90 btn-glow group">
               Talk to an Expert
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Clock, User, Calendar, Share2 } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
+import { WovenLightBackground } from "@/components/ui/woven-light-hero";
 
 const posts: Record<string, { title: string; category: string; author: string; date: string; readTime: string; image: string; content: string }> = {
   "5-ways-erp-can-transform-your-small-business": {
@@ -59,9 +60,10 @@ const BlogPost = () => {
   return (
     <>
       <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0">
-          <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-solby-black/80" />
+        <div className="absolute inset-0 z-0">
+          <WovenLightBackground className="absolute inset-0 opacity-75" overlayClassName="absolute top-0 right-0 h-full w-1/2 opacity-15 pointer-events-none" />
+          <img src={post.image} alt={post.title} className="w-full h-full object-cover opacity-20 mix-blend-overlay" />
+          <div className="absolute inset-0 bg-gradient-to-b from-solby-black/75 via-solby-black/80 to-background" />
         </div>
         <div className="container-custom relative z-10 max-w-3xl mx-auto text-center">
           <SectionWrapper>

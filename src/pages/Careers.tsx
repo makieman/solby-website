@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Lightbulb, Target, Shield, MapPin, Clock, ArrowRight } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
+import { WovenLightBackground } from "@/components/ui/woven-light-hero";
 
 const values = [
   { icon: Lightbulb, title: "Innovation", desc: "We push boundaries to create software that solves real problems for African businesses." },
@@ -16,8 +17,11 @@ const positions = [
 const Careers = () => (
   <>
     <section className="relative pt-32 pb-20 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-solby-black to-solby-blue-dark" />
-      <div className="absolute inset-0 bg-solby-blue/20" />
+      <div className="absolute inset-0 z-0">
+        <WovenLightBackground className="absolute inset-0 opacity-80" overlayClassName="absolute top-0 right-0 h-full w-1/2 opacity-20 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-solby-black/80 via-solby-blue-dark/75 to-solby-black/85" />
+        <div className="absolute inset-0 bg-solby-blue/15" />
+      </div>
       <div className="container-custom relative z-10 text-center">
         <SectionWrapper>
           <h1 className="heading-xl text-white mb-4">Join the Solby Team</h1>

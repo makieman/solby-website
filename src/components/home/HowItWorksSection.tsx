@@ -32,13 +32,13 @@ const HowItWorksSection = () => {
   }, [active]);
 
   return (
-    <section className="pt-2 pb-20 relative bg-[#f8fafc] dark:bg-[#0f172a] overflow-hidden">
+    <section className="section-padding relative bg-[#f8fafc] dark:bg-[#0f172a] overflow-hidden">
       {/* Seamless grid pattern from previous section */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#334155_1px,transparent_1px),linear-gradient(to_bottom,#334155_1px,transparent_1px)] [background-size:40px_40px] opacity-[0.4] dark:opacity-[0.15]"></div>
       </div>
       <div className="container-custom">
-        <SectionWrapper className="text-center mb-16">
+        <SectionWrapper className="text-center section-heading-spacing">
           <span className="text-xs font-semibold tracking-widest uppercase text-primary">Process</span>
           <h2 className="heading-lg mt-3 text-foreground">How Solby Works For You</h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">

@@ -4,11 +4,34 @@ import * as THREE from 'three';
 import { CheckCircle2 } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 
+interface WovenLightBackgroundProps {
+    className?: string;
+    overlayClassName?: string;
+    canvasClassName?: string;
+}
+
+export const WovenLightBackground = ({
+    className = 'absolute inset-0 z-0 overflow-hidden',
+    overlayClassName = 'absolute top-0 right-0 h-full w-1/2 opacity-10 pointer-events-none',
+    canvasClassName = 'absolute inset-0 z-0 h-full w-full',
+}: WovenLightBackgroundProps) => {
+    const { theme } = useTheme();
+
+    return (
+        <div className={className}>
+            <WovenCanvas key={theme} isDarkMode={theme === 'dark'} className={canvasClassName} />
+
+            <div className={overlayClassName}>
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.3),transparent_70%)]" />
+            </div>
+        </div>
+    );
+};
+
 // --- Main Hero Component ---
 export const WovenLightHero = () => {
     const textControls = useAnimation();
     const buttonControls = useAnimation();
-    const { theme } = useTheme();
 
     useEffect(() => {
         // Add a more elegant font
@@ -36,14 +59,14 @@ export const WovenLightHero = () => {
         }
     }, [textControls, buttonControls]);
 
-    const headline = "Powerful Features";
+    const headline = "Explore Solby Features";
 
     return (
-        <div className="relative flex h-[80vh] min-h-[600px] w-full flex-col items-center justify-center overflow-hidden bg-background">
-            <WovenCanvas key={theme} isDarkMode={theme === 'dark'} />
+        <div className="relative flex h-[62vh] min-h-[460px] w-full flex-col items-center justify-center overflow-hidden bg-background">
+            <WovenLightBackground />
 
-            <div className="relative z-10 text-center px-4 w-full max-w-5xl mx-auto pt-20 pointer-events-none">
-                <h1 className="text-5xl md:text-7xl lg:text-8xl text-foreground font-bold tracking-tight" style={{ textShadow: '0 0 50px rgba(59, 130, 246, 0.3)' }}>
+            <div className="relative z-10 mx-auto w-full max-w-4xl px-4 pt-16 text-center pointer-events-none">
+                <h1 className="text-4xl md:text-6xl lg:text-7xl text-foreground font-bold tracking-tight" style={{ textShadow: '0 0 22px rgba(59, 130, 246, 0.16)' }}>
                     {headline.split(" ").map((word, i) => (
                         <span key={i} className="inline-block">
                             {word.split("").map((char, j) => (
@@ -59,16 +82,16 @@ export const WovenLightHero = () => {
                     custom={headline.length}
                     initial={{ opacity: 0, y: 30 }}
                     animate={textControls}
-                    className="mx-auto mt-6 max-w-2xl text-lg md:text-xl text-muted-foreground"
+                    className="mx-auto mt-5 max-w-2xl text-base md:text-lg text-muted-foreground"
                 >
-                    Discover how Solby's comprehensive suite transforms your business operations with next-generation AI analytics and automated financial workflows.
+                    Review Solby's finance, operations, analytics, and people tools in a clearer, product-first layout.
                 </motion.p>
                 <motion.div initial={{ opacity: 0 }} animate={buttonControls} className="mt-10 flex flex-wrap justify-center gap-4 pointer-events-none">
                 </motion.div>
 
                 {/* trust row (hero footer) */}
-                <motion.div initial={{ opacity: 0 }} animate={buttonControls} className="mt-10 flex flex-wrap justify-center gap-6 text-sm text-center text-muted-foreground transition-opacity">
-                    {["No credit card required", "Free 14-day trial", "Cancel anytime"].map((t) => (
+                <motion.div initial={{ opacity: 0 }} animate={buttonControls} className="mt-8 flex flex-wrap justify-center gap-5 text-sm text-center text-muted-foreground transition-opacity">
+                    {["Finance", "Operations", "AI Analytics", "People"].map((t) => (
                         <span key={t} className="flex items-center gap-2">
                             <CheckCircle2 className="w-4 h-4 text-emerald-500" />
                             {t}
@@ -77,16 +100,12 @@ export const WovenLightHero = () => {
                 </motion.div>
             </div>
 
-            <div className="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.3),transparent_70%)]" />
-            </div>
-
         </div>
     );
 };
 
 // --- Three.js Canvas Component ---
-const WovenCanvas = ({ isDarkMode }: { isDarkMode: boolean }) => {
+const WovenCanvas = ({ isDarkMode, className }: { isDarkMode: boolean; className?: string }) => {
     const mountRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -233,5 +252,5 @@ const WovenCanvas = ({ isDarkMode }: { isDarkMode: boolean }) => {
         };
     }, []);
 
-    return <div ref={mountRef} className="absolute inset-0 z-0 h-full w-full object-cover" />;
+    return <div ref={mountRef} className={className ?? 'absolute inset-0 z-0 h-full w-full'} />;
 };

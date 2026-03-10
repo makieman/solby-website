@@ -1,46 +1,38 @@
-import { Marquee } from "@/components/ui/marquee"
-import { Hexagon, Triangle, Framer, Cloud } from "lucide-react"
+import { Component } from "@/components/ui/background-components";
 
-const Logos = {
-    tailwindcss: () => (
-        <div className="flex items-center gap-2 font-bold text-xl text-cyan-500">
-            <Hexagon className="h-[28px] w-auto" />
-            <span>Tailwind</span>
-        </div>
-    ),
-    nextjs: () => (
-        <div className="flex items-center gap-2 font-bold text-xl text-primary">
-            <Triangle className="h-[28px] w-auto fill-current" />
-            <span>Next.js</span>
-        </div>
-    ),
-    framer: () => (
-        <div className="flex items-center gap-2 font-bold text-xl text-primary">
-            <Framer className="h-[28px] w-auto" />
-            <span>Motion</span>
-        </div>
-    ),
-    aws: () => (
-        <div className="flex items-center gap-2 font-bold text-xl dark:text-white text-gray-900">
-            <Cloud className="h-[32px] w-auto" />
-            <span>AWS</span>
-        </div>
-    ),
-};
-
-export function MarqueeDemo() {
-    const arr = [Logos.tailwindcss, Logos.framer, Logos.nextjs, Logos.aws]
-
+export default function DemoOne() {
     return (
-        <Marquee>
-            {arr.map((Logo, index) => (
-                <div
-                    key={index}
-                    className="relative h-full w-fit mx-[4rem] flex items-center justify-start"
-                >
-                    <Logo />
+        <div className="space-y-8 p-6">
+            <div>
+                <h4 className="mb-2 font-semibold">Default (uses component props / defaults)</h4>
+                <Component />
+            </div>
+
+            <div>
+                <h4 className="mb-2 font-semibold">Overridden via CSS variables</h4>
+                <div style={{
+                    // demonstrate overriding via CSS variables on a wrapper
+                    ['--bg-start' as any]: '#FFF1E6',
+                    ['--bg-end' as any]: '#EAF6FF',
+                    ['--bg-opacity' as any]: '0.45',
+                    ['--bg-mix' as any]: 'screen',
+                }}>
+                    <Component />
                 </div>
-            ))}
-        </Marquee>
+            </div>
+        </div>
+    );
+}
+import { Navbar1 } from "@/components/ui/navbar-1"
+import { CtaCard } from "@/components/ui/cta-card"
+
+const Demo = () => {
+    return (
+        <>
+            <Navbar1 />
+            <CtaCard />
+        </>
     )
 }
+
+export { Demo }

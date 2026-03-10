@@ -37,7 +37,7 @@ const features = [
 ];
 
 const FeaturesSection = () => (
-  <section className="pt-20 md:pt-28 pb-2 relative bg-[#f8fafc] dark:bg-[#0f172a] overflow-hidden">
+  <section className="section-padding relative bg-[#f8fafc] dark:bg-[#0f172a] overflow-hidden">
     {/* Grid pattern and ambient lights */}
     <div className="absolute inset-0 z-0 pointer-events-none">
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#334155_1px,transparent_1px),linear-gradient(to_bottom,#334155_1px,transparent_1px)] [background-size:40px_40px] opacity-[0.4] dark:opacity-[0.15]"></div>
@@ -46,17 +46,18 @@ const FeaturesSection = () => (
     </div>
 
     <div className="container-custom relative z-10">
-      <SectionWrapper className="text-center mb-16">
-        <span className="text-xs font-semibold tracking-widest uppercase text-primary">Powerful Features</span>
-        <h2 className="heading-lg mt-3 text-foreground">Everything Your Business Needs</h2>
-        <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-          From operations to finance — Solby gives you the tools to run a smarter business.
-        </p>
-      </SectionWrapper>
+      <div className="mx-auto w-full max-w-6xl">
+        <SectionWrapper className="text-center section-heading-spacing max-w-3xl mx-auto">
+          <span className="text-xs font-semibold tracking-widest uppercase text-primary">Powerful Features</span>
+          <h2 className="heading-lg mt-3 text-foreground">Everything Your Business Needs</h2>
+          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
+            From operations to finance — Solby gives you the tools to run a smarter business.
+          </p>
+        </SectionWrapper>
 
-      <div className="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
-        {features.map((f, i) => (
-          <SectionWrapper key={f.title} delay={i * 0.1}>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4 items-stretch">
+          {features.map((f, i) => (
+            <SectionWrapper key={f.title} delay={i * 0.1} className="h-full">
             <div className="group relative bg-white/70 dark:bg-slate-800/70 backdrop-blur-md rounded-2xl p-6 border border-white/50 dark:border-white/10 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden h-full flex flex-col">
               <div className="absolute top-0 left-0 w-full h-1 opacity-0 group-hover:opacity-100 transition-opacity" style={{ background: `linear-gradient(to right, ${f.color}80, ${f.color})` }}></div>
               <div className="flex justify-between items-start mb-4">
@@ -84,8 +85,9 @@ const FeaturesSection = () => (
                 <ArrowRight className="w-3.5 h-3.5 ml-1 transform group-hover/link:translate-x-1 transition-transform" />
               </a>
             </div>
-          </SectionWrapper>
-        ))}
+            </SectionWrapper>
+          ))}
+        </div>
       </div>
     </div>
   </section>

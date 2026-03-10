@@ -14,7 +14,7 @@ const logos = [
 const ClientLogosSection = () => (
   <section className="section-padding relative">
     <div className="container-custom">
-      <SectionWrapper className="text-center mb-16">
+      <SectionWrapper className="text-center section-heading-spacing">
         <span className="text-xs font-semibold tracking-widest uppercase text-primary">Trusted By</span>
         <h2 className="heading-lg mt-3 text-foreground">Get inspired by companies who have done it</h2>
         <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
@@ -22,43 +22,27 @@ const ClientLogosSection = () => (
         </p>
       </SectionWrapper>
 
-      <div className="relative flex flex-col items-center justify-center -mx-4 sm:-mx-6 lg:-mx-8">
-        <Marquee pauseOnHover speed={40} className="py-2">
-          {logos.map((logo) => (
+      <div className="mt-8 flex w-full relative py-8">
+        {/* Left fade out effect */}
+        <div className="pointer-events-none absolute left-0 top-0 z-20 h-full w-20 bg-gradient-to-r from-background to-transparent md:w-32" />
+        {/* Right fade out effect */}
+        <div className="pointer-events-none absolute right-0 top-0 z-20 h-full w-20 bg-gradient-to-l from-background to-transparent md:w-32" />
+
+        <Marquee speed={40} pauseOnHover className="py-4 overflow-hidden w-full">
+          {[...logos, ...logos, ...logos].map((logo, index) => (
             <div
-              key={logo.name}
-              className="group mx-4 sm:mx-8 bg-card border border-border rounded-xl p-4 sm:p-6 flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer min-w-[160px] sm:min-w-[200px]"
+              key={`${logo.name}-${index}`}
+              className="flex shrink-0 items-center justify-center mx-8"
             >
               <img
                 src={logo.url}
                 alt={logo.name}
-                className="h-12 w-auto sm:h-16 object-contain dark:brightness-90"
+                className="h-10 w-auto sm:h-12 lg:h-14 object-contain dark:brightness-90 opacity-70 hover:opacity-100 transition-opacity"
                 loading="lazy"
               />
             </div>
           ))}
         </Marquee>
-
-        {/* Optional reverse row if there are many logos, repeating the same ones just for depth */}
-        <Marquee pauseOnHover speed={50} direction="right" className="py-2">
-          {[...logos].reverse().map((logo) => (
-            <div
-              key={`rev-${logo.name}`}
-              className="group mx-4 sm:mx-8 bg-card border border-border rounded-xl p-4 sm:p-6 flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer min-w-[160px] sm:min-w-[200px]"
-            >
-              <img
-                src={logo.url}
-                alt={logo.name}
-                className="h-12 w-auto sm:h-16 object-contain dark:brightness-90"
-                loading="lazy"
-              />
-            </div>
-          ))}
-        </Marquee>
-
-        {/* Gradient fades for the edges */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background dark:from-background to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-background dark:from-background to-transparent" />
       </div>
 
       <p className="text-center text-sm text-muted-foreground mt-10">

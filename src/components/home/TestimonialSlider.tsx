@@ -43,7 +43,7 @@ const TestimonialSlider = () => {
   return (
     <section className="section-padding bg-muted/50 relative">
       <div className="container-custom">
-        <SectionWrapper className="text-center mb-16">
+        <SectionWrapper className="text-center section-heading-spacing">
           <span className="text-xs font-semibold tracking-widest uppercase text-primary">Testimonials</span>
           <h2 className="heading-lg mt-3 text-foreground">What Our Clients Say</h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">

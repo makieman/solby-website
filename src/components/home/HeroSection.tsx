@@ -126,7 +126,7 @@ const HeroSection = () => {
           </div>
 
           {/* ── Right col — hero photo ── */}
-          <div className="hidden lg:flex relative h-[600px] group items-start justify-end self-start -mt-4">
+          <div className="hidden lg:flex relative h-[600px] group items-start justify-end self-start mt-12">
             {/* ambient glow */}
             <div className="absolute inset-0 bg-gradient-to-br from-solby-blue/15 via-transparent to-solby-green/15 rounded-3xl blur-3xl z-0" />
 
@@ -134,9 +134,9 @@ const HeroSection = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.15 }}
-              className="relative z-10 w-[115%] mr-[-10%] select-none pointer-events-none"
+              className="relative z-10 w-[90%] mr-4 lg:mr-8 select-none pointer-events-none"
             >
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-black/40 aspect-[4/3]">
+              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-lg border border-border/50">
                 <img
                   src={heroDashboard}
                   alt="Professional using Solby Vision"
@@ -157,7 +157,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="lg:hidden mt-10 rounded-2xl overflow-hidden border border-white/10 shadow-xl"
+          className="lg:hidden mt-10 rounded-2xl overflow-hidden"
         >
           <img src={heroDashboard} alt="Professional using Solby Vision" className="w-full" draggable={false} />
         </motion.div>

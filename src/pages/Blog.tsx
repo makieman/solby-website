@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Clock, User } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
+import { WovenLightBackground } from "@/components/ui/woven-light-hero";
 
 const posts = [
   {
@@ -43,13 +44,21 @@ const posts = [
 
 const Blog = () => (
   <>
-    <section className="relative pt-32 pb-20 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-solby-black to-solby-blue-dark" />
-      <div className="absolute inset-0 bg-solby-blue/20" />
+    <section className="relative pt-32 pb-20 overflow-hidden min-h-[40vh] flex items-center">
+      {/* Background */}
+      <div className="absolute inset-0 z-0">
+        <WovenLightBackground className="absolute inset-0 opacity-80" overlayClassName="absolute top-0 right-0 h-full w-1/2 opacity-20 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/45 via-background/80 to-background" />
+      </div>
+
+      {/* Ambient glows */}
+      <div className="absolute top-1/3 right-0 w-[400px] h-[400px] bg-solby-blue/10 rounded-full blur-[100px] pointer-events-none z-0" />
+      <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-solby-green/10 rounded-full blur-[100px] pointer-events-none z-0" />
+
       <div className="container-custom relative z-10 text-center">
         <SectionWrapper>
-          <h1 className="heading-xl text-white mb-4">Insights & Updates</h1>
-          <p className="text-lg text-white/70 max-w-2xl mx-auto">
+          <h1 className="heading-xl text-foreground mb-4">Insights & Updates</h1>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Tips, guides, and company news to help you grow your business.
           </p>
         </SectionWrapper>

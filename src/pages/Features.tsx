@@ -1,7 +1,6 @@
-import { Calculator, CreditCard, ReceiptText, ShoppingCart, Package, Truck, BarChart3, Brain, FileBarChart, Users, Briefcase, UserCog, ArrowRight, Check } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Calculator, CreditCard, ReceiptText, ShoppingCart, Package, Truck, BarChart3, Brain, FileBarChart, Users, Briefcase, UserCog, Check } from "lucide-react";
 import { WovenLightHero } from "@/components/ui/woven-light-hero";
-import financeImg from "@/assets/features/finance.jpg";
+import financeImg from "@/assets/features/finance.png";
 import operationsImg from "@/assets/features/operations.jpg";
 import biImg from "@/assets/features/business-intelligence.png";
 import peopleImg from "@/assets/features/people.png";
@@ -60,53 +59,51 @@ const Features = () => (
 
     {/* Feature groups styled with Glassmorphism / Stitch inspiration */}
     {groups.map((group, index) => (
-      <section key={group.title} className={`py-24 relative overflow-hidden ${index % 2 !== 0 ? 'bg-muted/30' : ''}`}>
-        <div className="container-custom relative z-10">
+      <section key={group.title} className={`relative overflow-hidden py-20 ${index % 2 !== 0 ? 'bg-muted/40' : 'bg-background'}`}>
+        <div className="container-custom relative z-10 max-w-6xl">
 
-          <div className={`flex flex-col lg:flex-row items-center gap-16 mb-20 ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
-            <div className="lg:w-1/2 text-center lg:text-left">
+          <div className={`mb-16 flex flex-col items-center gap-10 lg:flex-row ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
+            <div className="lg:w-5/12 text-center lg:text-left">
               <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">{group.title}</span>
-              <h2 className="text-4xl lg:text-5xl font-extrabold text-foreground mb-6 leading-tight">{group.subtitle}</h2>
-              <p className="text-muted-foreground text-lg max-w-xl mx-auto lg:mx-0">
+              <h2 className="mb-5 text-4xl font-extrabold leading-tight text-foreground lg:text-5xl">{group.subtitle}</h2>
+              <p className="max-w-xl mx-auto text-base text-muted-foreground lg:mx-0 lg:text-lg">
                 {group.description}
               </p>
             </div>
-            <div className="lg:w-1/2 relative">
-              <div className="relative z-20 animate-subtle-float">
+            <div className="relative flex justify-center lg:w-7/12">
+              <div className="relative z-20 w-full max-w-[380px] lg:max-w-[430px]">
                 <img
                   alt={group.title}
-                  className="rounded-3xl shadow-2xl border border-white/10 dark:border-white/5 object-cover aspect-[4/3] w-full"
+                  className="aspect-[4/3] w-full h-auto rounded-3xl border border-white/10 object-cover shadow-md dark:border-white/5"
                   src={group.image}
                 />
               </div>
-              {/* Glow behind image */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-primary/20 rounded-full blur-[80px] -z-10" />
+              <div className="absolute left-1/2 top-1/2 -z-10 h-[102%] w-[102%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 opacity-25 blur-[34px]" />
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {group.cards.map((card) => (
               <div
                 key={card.name}
-                className={`group relative bg-card p-8 rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-300 border border-border overflow-hidden`}
+                className="group relative overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
               >
-                {/* Top colored border effect */}
                 <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-current to-transparent opacity-50 ${card.color}`} />
                 <div className={`absolute top-0 left-0 w-full h-[2px] ${card.bg.replace('/10', '')}`} />
 
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 duration-300 ${card.bg}`}>
+                <div className={`mb-5 flex h-12 w-12 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-105 ${card.bg}`}>
                   <card.icon className={`w-6 h-6 ${card.color}`} />
                 </div>
 
-                <h3 className="text-2xl font-bold text-foreground mb-4">{card.name}</h3>
-                <p className="text-muted-foreground mb-8 leading-relaxed">
+                <h3 className="mb-3 text-xl font-bold text-foreground">{card.name}</h3>
+                <p className="mb-6 text-sm leading-relaxed text-muted-foreground sm:text-base">
                   {card.desc}
                 </p>
 
-                <ul className="space-y-4">
-                  {card.benefits.map((b) => (
+                <ul className="space-y-3">
+                  {card.benefits.slice(0, 3).map((b) => (
                     <li key={b} className="flex items-center gap-3 text-sm font-medium text-foreground">
-                      <Check className={`w-5 h-5 ${card.color}`} />
+                      <Check className={`h-4 w-4 ${card.color}`} />
                       {b}
                     </li>
                   ))}
