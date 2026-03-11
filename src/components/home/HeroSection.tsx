@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { BarChart3, Zap, LifeBuoy, ArrowRight, TrendingUp, Users, ShieldCheck, CheckCircle2 } from "lucide-react";
+import { BarChart3, Zap, LifeBuoy, ArrowRight, TrendingUp, Users, ShieldCheck, CheckCircle2, MessageCircle } from "lucide-react";
 import heroDashboard from "@/assets/hero_dashboard.png"
 
 const slides = [
@@ -9,11 +9,6 @@ const slides = [
     line1: "Transform Your",
     line2: "Business Operations",
     description: "Streamline your entire business with our comprehensive ERP solution designed for African enterprises.",
-  },
-  {
-    line1: "Revolutionize Your",
-    line2: "Financial Management",
-    description: "Advanced accounting tools with real-time financial insights and KRA compliance built in.",
   },
   {
     line1: "Supercharge Your",
@@ -26,12 +21,14 @@ const slides = [
     description: "Complete human resource management with automated payroll processing.",
   },
 ];
-
-const pills = [
-  { icon: BarChart3, label: "Real-time Analytics" },
-  { icon: Zap, label: "99.9% Uptime" },
-  { icon: LifeBuoy, label: "24/7 Support" },
+const featureBadges = [
+  { icon: BarChart3, text: "Real-time Analytics" },
+  { icon: Zap, text: "99.9% Uptime" },
+  { icon: LifeBuoy, text: "24/7 Support" },
+  { icon: MessageCircle, text: "+254 100 933316", isWhatsApp: true },
 ];
+
+
 
 // Browser chrome wrapper removed since we're using a full photo
 
@@ -47,7 +44,7 @@ const HeroSection = () => {
   const slide = slides[current];
 
   return (
-    <section className="relative min-h-[85vh] flex items-center pt-12">
+    <section className="relative min-h-[85vh] flex items-center pt-20 lg:pt-24">
       {/* Background */}
       <div className="absolute inset-0 mesh-grid" />
       <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-solby-blue/10 rounded-full blur-[120px]" />
@@ -65,7 +62,7 @@ const HeroSection = () => {
             </motion.div>
 
             {/* Fixed height container for text to prevent layout shift */}
-            <div className="h-[220px] md:h-[200px] lg:h-[240px] flex flex-col justify-start w-full max-w-[600px]">
+            <div className="h-[250px] md:h-[230px] lg:h-[270px] flex flex-col justify-start w-full max-w-[600px]">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={current}
@@ -84,18 +81,10 @@ const HeroSection = () => {
               </AnimatePresence>
             </div>
 
-            {/* feature pills */}
-            <div className="flex flex-wrap gap-3 mb-8">
-              {pills.map(({ icon: Icon, label }) => (
-                <span key={label} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-muted text-muted-foreground border border-border">
-                  <Icon className="w-3.5 h-3.5 text-primary" />
-                  {label}
-                </span>
-              ))}
-            </div>
+
 
             {/* CTAs */}
-            <div className="flex flex-wrap gap-4 mb-10 w-full">
+            <div className="flex flex-wrap gap-4 mt-6 mb-10 w-full">
               <Link to="/contact" className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-lg text-sm font-semibold bg-gradient-to-r from-solby-blue to-solby-blue-dark text-primary-foreground shadow-md shadow-solby-blue/20 hover:shadow-lg hover:shadow-solby-blue/30 hover:-translate-y-0.5 transition-all duration-300 group">
                 Get Started
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -112,6 +101,29 @@ const HeroSection = () => {
                   <CheckCircle2 className="w-3.5 h-3.5 text-solby-green" />
                   {t}
                 </span>
+              ))}
+            </div>
+            
+            {/* feature badges row */}
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mt-6">
+              {featureBadges.map((badge, idx) => (
+                badge.isWhatsApp ? (
+                  <a 
+                    key={idx}
+                    href="https://wa.me/254100933316"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 text-xs font-semibold text-solby-green hover:opacity-80 transition-opacity"
+                  >
+                    <badge.icon className="w-3.5 h-3.5" />
+                    {badge.text}
+                  </a>
+                ) : (
+                  <span key={idx} className="flex items-center gap-1.5 text-xs text-muted-foreground/80 font-medium">
+                    <badge.icon className="w-3.5 h-3.5 text-primary" />
+                    {badge.text}
+                  </span>
+                )
               ))}
             </div>
 

@@ -97,7 +97,7 @@ export function Header() {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.45, ease: 'easeOut' }}
-        className="pointer-events-auto mx-auto mt-3 w-full max-w-screen-xl px-4 sm:mt-4 sm:px-6 lg:px-8"
+        className="pointer-events-auto mx-auto mt-3 w-full max-w-6xl px-4 sm:mt-4 sm:px-6 lg:px-8"
       >
         <div
           className={cn(
