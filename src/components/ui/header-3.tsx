@@ -97,7 +97,7 @@ export function Header() {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.45, ease: 'easeOut' }}
-        className="pointer-events-auto mx-auto mt-3 w-full max-w-7xl px-4 sm:mt-4 sm:px-6 md:px-[80px]"
+        className="pointer-events-auto mx-auto mt-3 w-full max-w-screen-xl px-4 sm:mt-4 sm:px-6 lg:px-8"
       >
         <div
           className={cn(
@@ -106,8 +106,8 @@ export function Header() {
             scrolled && 'bg-background/82 border-border/70 shadow-[0_24px_70px_-28px_rgba(15,23,42,0.55)]',
           )}
         >
-          <nav className="flex h-14 items-center justify-between gap-2 px-2 sm:px-3 lg:h-[64px] lg:px-4">
-            <div className="flex min-w-0 items-center gap-2 lg:gap-5">
+          <nav className="relative flex h-14 items-center justify-between gap-2 px-2 sm:px-3 lg:h-[64px] lg:px-4">
+            <div className="flex min-w-0 items-center gap-2 lg:gap-5 z-10">
               <Link
                 to="/"
                 className="group flex shrink-0 items-center gap-2 rounded-full px-2 py-1 transition-colors hover:bg-accent/60"
@@ -119,24 +119,24 @@ export function Header() {
                 />
                 {/* Logo only - subtitle removed to reduce navbar size */}
               </Link>
-
-              <div className="hidden lg:flex items-center gap-1 rounded-full border border-border/50 bg-muted/25 p-1">
-                {primaryLinks.map((item) => (
-                  <Link
-                    key={item.title}
-                    to={item.to}
-                    className={cn(
-                      'inline-flex h-10 items-center rounded-full px-4 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground',
-                      matchesPath(location.pathname, item.to) && 'bg-background text-foreground shadow-sm ring-1 ring-border/60',
-                    )}
-                  >
-                    {item.title}
-                  </Link>
-                ))}
-              </div>
             </div>
 
-            <div className="hidden items-center gap-2 lg:flex">
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:flex items-center gap-1 rounded-full border border-border/50 bg-muted/25 p-1 z-10">
+              {primaryLinks.map((item) => (
+                <Link
+                  key={item.title}
+                  to={item.to}
+                  className={cn(
+                    'inline-flex h-10 items-center rounded-full px-4 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground',
+                    matchesPath(location.pathname, item.to) && 'bg-background text-foreground shadow-sm ring-1 ring-border/60',
+                  )}
+                >
+                  {item.title}
+                </Link>
+              ))}
+            </div>
+
+            <div className="hidden items-center gap-2 lg:flex z-10">
               <Button
                 variant="ghost"
                 size="icon"

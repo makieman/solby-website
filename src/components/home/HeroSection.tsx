@@ -47,14 +47,14 @@ const HeroSection = () => {
   const slide = slides[current];
 
   return (
-    <section className="relative min-h-[85vh] flex items-center overflow-hidden pt-12">
+    <section className="relative min-h-[85vh] flex items-center pt-12">
       {/* Background */}
       <div className="absolute inset-0 mesh-grid" />
       <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-solby-blue/10 rounded-full blur-[120px]" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-solby-green/10 rounded-full blur-[100px]" />
 
       <div className="container-custom relative z-10 py-8">
-        <div className="grid lg:grid-cols-[1fr_1.15fr] gap-14 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
 
           {/* ── Left col ── */}
           <div>
@@ -64,22 +64,25 @@ const HeroSection = () => {
               </span>
             </motion.div>
 
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={current}
-                initial={reducedMotion ? {} : { opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={reducedMotion ? {} : { opacity: 0, y: -20 }}
-                transition={{ duration: 0.4 }}
-              >
-                <h1 className="heading-xl mb-4">
-                  <span className="text-foreground">{slide.line1}</span>
-                  <br />
-                  <span className="gradient-text">{slide.line2}</span>
-                </h1>
-                <p className="text-lg text-muted-foreground max-w-lg mb-8">{slide.description}</p>
-              </motion.div>
-            </AnimatePresence>
+            {/* Fixed height container for text to prevent layout shift */}
+            <div className="h-[220px] md:h-[200px] lg:h-[240px] flex flex-col justify-start w-full max-w-[600px]">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={current}
+                  initial={reducedMotion ? {} : { opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={reducedMotion ? {} : { opacity: 0, y: -20, position: 'absolute' }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <h1 className="heading-xl mb-4 max-w-[520px] leading-[1.1]">
+                    <span className="text-foreground">{slide.line1}</span>
+                    <br />
+                    <span className="gradient-text">{slide.line2}</span>
+                  </h1>
+                  <p className="text-lg text-muted-foreground max-w-lg">{slide.description}</p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
 
             {/* feature pills */}
             <div className="flex flex-wrap gap-3 mb-8">
@@ -92,12 +95,12 @@ const HeroSection = () => {
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-wrap gap-3 mb-8">
-              <Link to="/contact" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold bg-gradient-to-r from-solby-blue to-solby-blue-dark text-primary-foreground shadow-md shadow-solby-blue/20 hover:shadow-lg hover:shadow-solby-blue/30 hover:-translate-y-0.5 transition-all duration-300 group">
+            <div className="flex flex-wrap gap-4 mb-10 w-full">
+              <Link to="/contact" className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-lg text-sm font-semibold bg-gradient-to-r from-solby-blue to-solby-blue-dark text-primary-foreground shadow-md shadow-solby-blue/20 hover:shadow-lg hover:shadow-solby-blue/30 hover:-translate-y-0.5 transition-all duration-300 group">
                 Get Started
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link to="/contact" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold border border-border text-foreground hover:bg-muted transition-colors">
+              <Link to="/contact" className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-lg text-sm font-semibold border border-border text-foreground hover:bg-muted transition-colors">
                 Try Demo
               </Link>
             </div>
@@ -126,7 +129,7 @@ const HeroSection = () => {
           </div>
 
           {/* ── Right col — hero photo ── */}
-          <div className="hidden lg:flex relative h-[600px] group items-start justify-end self-start mt-6">
+          <div className="hidden lg:block relative group">
             {/* ambient glow */}
             <div className="absolute inset-0 bg-gradient-to-br from-solby-blue/15 via-transparent to-solby-green/15 rounded-3xl blur-3xl z-0" />
 
@@ -134,13 +137,13 @@ const HeroSection = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.15 }}
-              className="relative z-10 w-[90%] mr-4 lg:mr-8 select-none pointer-events-none"
+              className="relative z-10 w-full select-none pointer-events-none"
             >
-              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-lg border border-border/50">
+              <div className="relative rounded-2xl overflow-hidden h-[380px] lg:h-[420px] xl:h-[450px] w-full shadow-lg border border-border/50">
                 <img
                   src={heroDashboard}
                   alt="Professional using Solby Vision"
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
                   draggable={false}
                 />
 
