@@ -100,12 +100,21 @@
 }
 
 @layer base {
-  * {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
     @apply border-border;
+  }
+
+  html {
+    max-width: 100vw;
+    overflow-x: hidden;
   }
 
   body {
     @apply bg-background text-foreground overflow-x-hidden;
+    max-width: 100vw;
     font-family: 'Inter', system-ui, sans-serif;
   }
 
@@ -172,7 +181,7 @@
     max-width: 1280px;
     margin-left: auto;
     margin-right: auto;
-    @apply px-4 sm:px-8 md:px-[80px];
+    @apply px-5 sm:px-8 md:px-[60px] lg:px-[80px];
   }
 
   .heading-xl {
