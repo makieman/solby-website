@@ -59,7 +59,6 @@ const policyLinks: LinkItem[] = [
 ];
 
 const primaryLinks = [
-  { title: 'Home', to: '/' },
   { title: 'Features', to: '/features' },
   { title: 'Industries', to: '/industries' },
   { title: 'Pricing', to: '/pricing' },
@@ -67,7 +66,6 @@ const primaryLinks = [
 ];
 
 const mainLinks: LinkItem[] = [
-  { title: 'Home', to: '/', icon: Home },
   { title: 'Features', to: '/features', icon: Sparkles },
   { title: 'Industries', to: '/industries', icon: Building2 },
   { title: 'Pricing', to: '/pricing', icon: Coins },

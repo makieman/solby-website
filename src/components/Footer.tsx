@@ -47,7 +47,6 @@ const Footer = () => {
               <h3 className="text-white font-semibold text-lg tracking-wide">Quick Links</h3>
               <ul className="space-y-3 text-sm">
                 {[
-                  { name: "Home", href: "/" },
                   { name: "Features", href: "/features" },
                   { name: "Pricing", href: "/pricing" },
                   { name: "Industries", href: "/industries" },

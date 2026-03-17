@@ -8,7 +8,6 @@ import { Link, useLocation } from "react-router-dom"
 import { useTheme } from "@/contexts/ThemeContext"
 
 const navLinks = [
-    { name: "Home", href: "/" },
     { name: "Features", href: "/features" },
     { name: "Industries", href: "/industries" },
     { name: "Pricing", href: "/pricing" },
