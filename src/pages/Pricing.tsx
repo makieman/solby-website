@@ -163,8 +163,8 @@ const Pricing = () => {
 
         <div className="container-custom relative z-10 py-10 text-center">
           <SectionWrapper>
-            <span className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20 mb-6">
-              Sell Your Dream.
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase bg-primary/10 text-primary border border-primary/20 mb-6">
+              Pricing
             </span>
             <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-foreground md:text-6xl lg:text-7xl">Flexible Pricing for Every Stage of Business</h1>
             <p className="mx-auto max-w-2xl text-base text-muted-foreground md:text-lg">
@@ -321,7 +321,7 @@ const Pricing = () => {
       <section className="bg-muted/50 py-14 md:py-16">
         <div className="container-custom">
           <SectionWrapper className="mb-10 text-center">
-            <span className="text-xs font-semibold tracking-widest uppercase text-primary">Power-ups</span>
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase bg-primary/10 text-primary border border-primary/20">Power-ups</span>
             <h2 className="heading-lg mt-3 text-foreground">Optional Add-ons</h2>
             <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
               Extend your plan with powerful integrations and bespoke customizations — only pay for what you need.

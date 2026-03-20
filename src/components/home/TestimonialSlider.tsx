@@ -44,7 +44,7 @@ const TestimonialSlider = () => {
     <section className="section-padding bg-muted/50 relative">
       <div className="container-custom">
         <SectionWrapper className="text-center section-heading-spacing">
-          <span className="text-xs font-semibold tracking-widest uppercase text-primary">Testimonials</span>
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase bg-primary/10 text-primary border border-primary/20">Testimonials</span>
           <h2 className="heading-lg mt-3 text-foreground">What Our Clients Say</h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
             Hear from businesses that have transformed their operations with Solby.
@@ -59,13 +59,13 @@ const TestimonialSlider = () => {
             >
               {testimonials.map((t, i) => (
                 <div key={i} className="w-full flex-shrink-0 px-4">
-                  <div className="bg-card border border-border rounded-2xl p-8 md:p-10 text-center">
+                  <div className="bg-card border border-border rounded-2xl p-8 md:p-10 text-center border-l-4 border-l-primary">
                     <div className="flex justify-center gap-1 mb-6">
                       {[...Array(5)].map((_, s) => (
-                        <Star key={s} className="w-5 h-5 fill-solby-blue text-solby-blue" />
+                        <Star key={s} className="w-5 h-5 text-primary" fill="currentColor" />
                       ))}
                     </div>
-                    <blockquote className="text-lg text-foreground leading-relaxed mb-6">
+                    <blockquote className="text-lg md:text-xl italic text-foreground leading-relaxed mb-6">
                       "{t.quote}"
                     </blockquote>
                     <div className="flex items-center justify-center gap-3">

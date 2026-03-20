@@ -169,7 +169,7 @@ export default function ProductGridSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <span className="inline-block px-4 py-1.5 mb-4 text-[10px] font-bold tracking-widest uppercase rounded-full bg-primary/10 text-primary border border-primary/20">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase bg-primary/10 text-primary border border-primary/20 mb-4">
               Ecosystem
             </span>
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground">

@@ -56,7 +56,11 @@ const HeroSection = () => {
           {/* ── Left col ── */}
           <div>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20 mb-6 font-inter">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20 shadow-sm shadow-primary/10 mb-6 font-inter">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
+                </span>
                 Introducing our next-gen Enterprise Software
               </span>
             </motion.div>
@@ -151,7 +155,7 @@ const HeroSection = () => {
               transition={{ duration: 0.8, delay: 0.15 }}
               className="relative z-10 w-full select-none pointer-events-none"
             >
-              <div className="relative rounded-2xl overflow-hidden h-[380px] lg:h-[420px] xl:h-[450px] w-full shadow-lg border border-border/50">
+              <div className="relative rounded-2xl overflow-hidden h-[380px] lg:h-[420px] xl:h-[450px] w-full shadow-lg border border-border/50 border-t-2 border-t-primary">
                 <img
                   src={heroDashboard}
                   alt="Professional using Solby Vision"

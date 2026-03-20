@@ -105,7 +105,7 @@ const Features = () => (
                   rotateX: 2,
                   rotateY: 2,
                 }}
-                className="group relative overflow-hidden rounded-3xl border border-slate-200 dark:border-white/10 bg-white/70 dark:bg-slate-900/50 p-8 shadow-sm backdrop-blur-sm transition-all duration-500 hover:shadow-2xl hover:bg-white dark:hover:bg-slate-900"
+                className="group relative overflow-hidden rounded-3xl border border-slate-200 dark:border-white/10 bg-white/70 dark:bg-slate-900/50 p-8 shadow-sm backdrop-blur-sm transition-all duration-500 hover:shadow-2xl hover:bg-white dark:hover:bg-slate-900 hover:border-primary/30"
                 style={{ perspective: "1000px", transformStyle: "preserve-3d" }}
               >
                 {/* Accent Line */}

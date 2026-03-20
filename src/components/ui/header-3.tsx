@@ -221,7 +221,7 @@ export function Header() {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.45, ease: 'easeOut' }}
-        className="pointer-events-auto mx-auto mt-3 w-full max-w-6xl px-4 sm:mt-4 sm:px-6 lg:px-8"
+        className="pointer-events-auto mx-auto mt-4 w-full max-w-6xl px-4 sm:mt-5 sm:px-6 lg:px-8"
       >
         <div
           className={cn(
@@ -230,29 +230,30 @@ export function Header() {
             scrolled && 'bg-background/82 border-border/70 shadow-[0_24px_70px_-28px_rgba(15,23,42,0.55)]',
           )}
         >
-          <nav className="relative flex h-14 items-center justify-between gap-2 px-2 sm:px-3 lg:h-[64px] lg:px-4">
-            <div className="flex min-w-0 items-center gap-2 lg:gap-5 z-10">
+          <nav className="relative flex h-14 items-center justify-between px-2 sm:px-3 lg:h-[58px] lg:px-3">
+            <div className="flex min-w-0 items-center z-10">
               <Link
                 to="/"
-                className="group flex shrink-0 items-center gap-2 rounded-full px-2 py-1 transition-colors hover:bg-accent/60"
+                className="group flex shrink-0 items-center rounded-full px-2 py-1.5 -ml-1 transition-colors hover:bg-accent/60"
               >
                 <img
                   src="https://res.cloudinary.com/dzorbbb7s/image/upload/v1760597632/Solby_Logo_rzhueo.png"
                   alt="Solby logo"
                   className="h-7 w-auto object-contain sm:h-8"
                 />
-                {/* Logo only - subtitle removed to reduce navbar size */}
               </Link>
             </div>
 
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:flex items-center gap-1 rounded-full border border-border/50 bg-muted/25 p-1 z-10">
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:flex items-center gap-0.5 z-10">
               {/* Products mega menu trigger */}
               <div ref={productsRef} className="relative">
                 <button
                   onClick={() => setProductsOpen((v) => !v)}
                   className={cn(
-                    'inline-flex h-10 items-center gap-1 rounded-full px-4 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground',
-                    (productsOpen || products.some(p => matchesPath(location.pathname, p.href))) && 'bg-background text-foreground shadow-sm ring-1 ring-border/60',
+                    'inline-flex h-9 items-center gap-1.5 rounded-full px-4 text-sm font-medium transition-colors',
+                    (productsOpen || products.some(p => matchesPath(location.pathname, p.href)))
+                      ? 'bg-background text-foreground shadow-sm ring-1 ring-border/60'
+                      : 'text-muted-foreground hover:bg-accent/70 hover:text-foreground'
                   )}
                 >
                   Products
@@ -272,8 +273,10 @@ export function Header() {
                   key={item.title}
                   to={item.to}
                   className={cn(
-                    'inline-flex h-10 items-center rounded-full px-4 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground',
-                    matchesPath(location.pathname, item.to) && 'bg-background text-foreground shadow-sm ring-1 ring-border/60',
+                    'relative h-9 px-4 text-sm font-medium transition-all rounded-full flex items-center',
+                    matchesPath(location.pathname, item.to)
+                      ? 'bg-background text-foreground shadow-sm ring-1 ring-border/60'
+                      : 'text-muted-foreground hover:bg-accent/70 hover:text-foreground'
                   )}
                 >
                   {item.title}
@@ -281,26 +284,26 @@ export function Header() {
               ))}
             </div>
 
-            <div className="hidden items-center gap-2 lg:flex z-10">
+            <div className="hidden items-center gap-1.5 lg:flex z-10">
               <Button
                 variant="ghost"
                 size="icon"
-                className="rounded-full text-muted-foreground hover:text-foreground"
+                className="rounded-full h-9 w-9 text-muted-foreground hover:text-foreground hover:bg-accent/70"
                 onClick={toggleTheme}
                 aria-label="Toggle theme"
               >
                 {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
               </Button>
-              <Button asChild className="rounded-full px-5 shadow-lg shadow-primary/20">
+              <Button asChild className="rounded-full h-9 px-4 text-sm font-semibold shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/25 transition-shadow">
                 <Link to="/contact">Get Started</Link>
               </Button>
             </div>
 
-            <div className="flex items-center gap-2 lg:hidden">
+            <div className="flex items-center gap-1.5 lg:hidden">
               <Button
                 variant="ghost"
                 size="icon"
-                className="rounded-full text-muted-foreground hover:text-foreground"
+                className="rounded-full h-9 w-9 text-muted-foreground hover:text-foreground hover:bg-accent/70"
                 onClick={toggleTheme}
                 aria-label="Toggle theme"
               >
@@ -310,7 +313,7 @@ export function Header() {
                 size="icon"
                 variant="outline"
                 onClick={() => setOpen((value) => !value)}
-                className="rounded-full border-border/70 bg-background/80"
+                className="rounded-full h-9 w-9 border-border/70 bg-background/80"
                 aria-expanded={open}
                 aria-controls="mobile-menu"
                 aria-label="Toggle menu"

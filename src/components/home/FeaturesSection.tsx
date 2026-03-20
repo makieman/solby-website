@@ -58,7 +58,7 @@ const FeaturesSection = () => {
 
         {/* ── Section header ──────────────────────────────────── */}
         <SectionWrapper className="text-center section-heading-spacing max-w-3xl mx-auto">
-          <span className="text-xs font-semibold tracking-widest uppercase text-primary">
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase bg-primary/10 text-primary border border-primary/20">
             Platform Modules
           </span>
           <h2 className="heading-lg mt-3 text-white">

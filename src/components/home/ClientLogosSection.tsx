@@ -15,7 +15,7 @@ const ClientLogosSection = () => (
   <section className="section-padding relative">
     <div className="container-custom">
       <SectionWrapper className="text-center section-heading-spacing">
-        <span className="text-xs font-semibold tracking-widest uppercase text-primary">Trusted By</span>
+        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase bg-primary/10 text-primary border border-primary/20">Trusted By</span>
         <h2 className="heading-lg mt-3 text-foreground">Get inspired by companies who have done it</h2>
         <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
           Leading companies across industries are leveraging Solby to transform their operations and drive innovation.

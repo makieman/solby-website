@@ -46,7 +46,7 @@ const PricingPreview = () => {
     <section className="section-padding relative">
       <div className="container-custom">
         <SectionWrapper className="text-center section-heading-spacing">
-          <span className="text-xs font-semibold tracking-widest uppercase text-primary">Pricing</span>
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase bg-primary/10 text-primary border border-primary/20">Pricing</span>
           <h2 className="heading-lg mt-3 text-foreground">Simple, Transparent Pricing</h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
             Choose the plan that fits your business — scale anytime.

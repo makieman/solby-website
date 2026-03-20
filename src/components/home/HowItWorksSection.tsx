@@ -39,7 +39,7 @@ const HowItWorksSection = () => {
       </div>
       <div className="container-custom">
         <SectionWrapper className="text-center section-heading-spacing">
-          <span className="text-xs font-semibold tracking-widest uppercase text-primary">Process</span>
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase bg-primary/10 text-primary border border-primary/20">Process</span>
           <h2 className="heading-lg mt-3 text-foreground">How Solby Works For You</h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
             A simple, proven process to transform your business operations and drive growth.

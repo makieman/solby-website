@@ -35,7 +35,7 @@ const CtaSection = () => (
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
         <Link
           to="/contact"
-          className="w-full sm:w-auto px-8 py-4 bg-white text-[#1a3ee8] rounded-full font-semibold text-base shadow-xl hover:shadow-2xl hover:bg-gray-50 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2 group ring-2 ring-white/30"
+          className="w-full sm:w-auto px-8 py-4 bg-white text-[#1a3ee8] rounded-full font-semibold text-base shadow-xl hover:shadow-2xl hover:bg-gray-50 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2 group ring-2 ring-white/30 btn-pulse-glow"
         >
           Get Started Today
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
