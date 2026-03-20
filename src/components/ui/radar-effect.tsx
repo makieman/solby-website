@@ -47,10 +47,10 @@ export const Radar = ({
           to   { transform: rotate(360deg); }
         }
         .animate-radar-spin {
-          animation: radar-spin 1.5s linear infinite;
+          animation: radar-spin 0.8s linear infinite;
         }
         .animate-radar-spin-once {
-          animation: radar-spin-once 1.5s linear 1 forwards;
+          animation: radar-spin-once 0.8s linear 1 forwards;
         }
       `}</style>
       {/* Rotating sweep line */}
@@ -114,11 +114,11 @@ export const IconContainer = ({
       initial={false}
       animate={{ opacity: 1, scale: 1 }}
       transition={{
-        duration: 0.25,
+        duration: 0.15,
         delay: delay ?? 0,
         type: "spring",
-        damping: 18,
-        stiffness: 300,
+        damping: 20,
+        stiffness: 400,
       }}
       whileHover={{
         y: -8,

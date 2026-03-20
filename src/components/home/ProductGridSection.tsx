@@ -37,7 +37,7 @@ const useContainerSize = () => {
   return size;
 };
 
-const DURATION = 1500;
+const DURATION = 800;
 
 export default function ProductGridSection() {
   const navigate = useNavigate();
@@ -130,20 +130,20 @@ export default function ProductGridSection() {
 
       products.forEach((product, i) => {
         const diff = angleDiff(angle, product.angle);
-        if (diff < 25 && !revealedRef.current[i]) {
+        if (diff < 40 && !revealedRef.current[i]) {
           revealedRef.current[i] = true;
           setRevealed(prev => { const n = [...prev]; n[i] = true; return n; });
           setGlowing(prev => { const n = [...prev]; n[i] = true; return n; });
           setTimeout(() => {
             setGlowing(prev => { const n = [...prev]; n[i] = false; return n; });
-          }, 300);
+          }, 200);
         }
       });
 
-      if (elapsed >= DURATION + 150) {
+      if (elapsed >= DURATION + 100) {
         clearInterval(interval);
         setRadarVisible(false);
-        setTimeout(() => setShowRadar(false), 500);
+        setTimeout(() => setShowRadar(false), 300);
       }
     }, 16);
 
@@ -218,11 +218,18 @@ export default function ProductGridSection() {
               return (
                 <motion.div
                   key={product.text}
-                  animate={{ 
-                    opacity: revealed[i] ? 1 : 0, 
-                    scale: revealed[i] ? 1 : 0.6 
+                  initial={{ opacity: 0, scale: 0, rotate: -15 }}
+                  animate={{
+                    opacity: revealed[i] ? 1 : 0,
+                    scale: revealed[i] ? 1 : 0,
+                    rotate: revealed[i] ? 0 : -15,
                   }}
-                  transition={{ type: "spring", stiffness: 180, damping: 25, mass: 0.8 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 15,
+                    mass: 0.6,
+                  }}
                   style={{
                     position: 'absolute',
                     left: cx,
