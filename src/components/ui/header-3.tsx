@@ -17,7 +17,14 @@ import {
   Sun,
   Cookie,
   Scale,
+  ChevronDown,
+  ArrowRight,
 } from 'lucide-react';
+import { HiDocumentText, HiOutlineOfficeBuilding } from 'react-icons/hi';
+import { HiMiniDocumentArrowUp } from 'react-icons/hi2';
+import { AiFillDollarCircle } from 'react-icons/ai';
+import { BsClipboardDataFill } from 'react-icons/bs';
+import { BiSolidReport } from 'react-icons/bi';
 
 import { Button } from '@/components/ui/button';
 import { MenuToggleIcon } from '@/components/ui/menu-toggle-icon';
@@ -72,15 +79,134 @@ const mainLinks: LinkItem[] = [
   { title: 'Blog', to: '/blog', icon: Newspaper },
 ];
 
+const products = [
+  {
+    text: 'Solby ERP',
+    desc: 'Run your entire business in one place',
+    icon: <HiDocumentText className="h-5 w-5" />,
+    href: '/products/erp',
+    color: '#3b82f6',
+  },
+  {
+    text: 'Solby Accounting',
+    desc: 'Invoices, reports & tax compliance',
+    icon: <AiFillDollarCircle className="h-5 w-5" />,
+    href: '/products/accounting',
+    color: '#10b981',
+  },
+  {
+    text: 'Solby HR',
+    desc: 'Payroll, staff & leave management',
+    icon: <BsClipboardDataFill className="h-5 w-5" />,
+    href: '/products/hr',
+    color: '#8b5cf6',
+  },
+  {
+    text: 'Solby Supply Chain',
+    desc: 'Stock, suppliers & procurement',
+    icon: <HiMiniDocumentArrowUp className="h-5 w-5" />,
+    href: '/products/supply-chain',
+    color: '#f59e0b',
+  },
+  {
+    text: 'Solby Bar & Restaurant',
+    desc: 'Orders, tables & kitchen workflows',
+    icon: <BiSolidReport className="h-5 w-5" />,
+    href: '/products/bar-restaurant',
+    color: '#ef4444',
+  },
+  {
+    text: 'Solby Multibranch',
+    desc: 'Manage all locations from one dashboard',
+    icon: <HiOutlineOfficeBuilding className="h-5 w-5" />,
+    href: '/features',
+    color: '#06b6d4',
+  },
+];
+
+const productLinks: LinkItem[] = [
+  { title: 'Solby ERP', to: '/products/erp', icon: HiDocumentText, description: 'Run your entire business' },
+  { title: 'Solby Accounting', to: '/products/accounting', icon: AiFillDollarCircle, description: 'Invoices & compliance' },
+  { title: 'Solby HR', to: '/products/hr', icon: BsClipboardDataFill, description: 'Payroll & staff' },
+  { title: 'Solby Supply Chain', to: '/products/supply-chain', icon: HiMiniDocumentArrowUp, description: 'Stock & procurement' },
+  { title: 'Solby Bar & Restaurant', to: '/products/bar-restaurant', icon: BiSolidReport, description: 'Orders & kitchen' },
+  { title: 'Solby Multibranch', to: '/features', icon: HiOutlineOfficeBuilding, description: 'All locations' },
+];
+
+const ProductsMegaMenu = ({ open, onClose }: { open: boolean; onClose: () => void }) => (
+  <AnimatePresence>
+    {open && (
+      <motion.div
+        initial={{ opacity: 0, y: -8 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -8 }}
+        transition={{ duration: 0.18, ease: 'easeOut' }}
+        className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[580px] rounded-2xl border border-border/70 bg-background/95 shadow-2xl supports-[backdrop-filter]:backdrop-blur-xl p-4 z-50"
+      >
+        <div className="mb-3 px-2">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Our Products</p>
+        </div>
+        <div className="grid grid-cols-2 gap-1">
+          {products.map((product) => (
+            <Link
+              key={product.text}
+              to={product.href}
+              onClick={onClose}
+              className="flex items-start gap-3 rounded-xl px-3 py-2.5 hover:bg-accent/60 transition-colors group"
+            >
+              <div
+                className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
+                style={{ backgroundColor: `${product.color}18` }}
+              >
+                <span style={{ color: product.color }}>{product.icon}</span>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
+                  {product.text}
+                </p>
+                <p className="text-xs text-muted-foreground mt-0.5 leading-snug">{product.desc}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <div className="mt-3 pt-3 border-t border-border/50 px-2 flex items-center justify-between">
+          <p className="text-xs text-muted-foreground">All products work together seamlessly</p>
+          <Link
+            to="/features"
+            onClick={onClose}
+            className="text-xs font-semibold text-primary hover:underline flex items-center gap-1"
+          >
+            View all features
+            <ArrowRight className="w-3 h-3" />
+          </Link>
+        </div>
+      </motion.div>
+    )}
+  </AnimatePresence>
+);
+
 export function Header() {
   const [open, setOpen] = React.useState(false);
+  const [productsOpen, setProductsOpen] = React.useState(false);
+  const productsRef = React.useRef<HTMLDivElement>(null);
   const location = useLocation();
   const scrolled = useScroll(12);
   const { theme, toggleTheme } = useTheme();
 
   React.useEffect(() => {
     setOpen(false);
+    setProductsOpen(false);
   }, [location.pathname]);
+
+  React.useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (productsRef.current && !productsRef.current.contains(e.target as Node)) {
+        setProductsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, []);
 
   React.useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
@@ -120,6 +246,27 @@ export function Header() {
             </div>
 
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:flex items-center gap-1 rounded-full border border-border/50 bg-muted/25 p-1 z-10">
+              {/* Products mega menu trigger */}
+              <div ref={productsRef} className="relative">
+                <button
+                  onClick={() => setProductsOpen((v) => !v)}
+                  className={cn(
+                    'inline-flex h-10 items-center gap-1 rounded-full px-4 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground',
+                    (productsOpen || products.some(p => matchesPath(location.pathname, p.href))) && 'bg-background text-foreground shadow-sm ring-1 ring-border/60',
+                  )}
+                >
+                  Products
+                  <ChevronDown
+                    className={cn(
+                      'h-3.5 w-3.5 transition-transform duration-200',
+                      productsOpen && 'rotate-180',
+                    )}
+                  />
+                </button>
+                <ProductsMegaMenu open={productsOpen} onClose={() => setProductsOpen(false)} />
+              </div>
+
+              {/* Regular nav links */}
               {primaryLinks.map((item) => (
                 <Link
                   key={item.title}
@@ -188,6 +335,7 @@ export function Header() {
           </div>
 
           <div className="space-y-6">
+            <MenuGroup title="Products" items={productLinks} pathname={location.pathname} compact />
             <MenuGroup title="Main" items={mainLinks} pathname={location.pathname} compact />
             <MenuGroup title="Company" items={companyLinks} pathname={location.pathname} />
             <MenuGroup title="Policies" items={policyLinks} pathname={location.pathname} compact />

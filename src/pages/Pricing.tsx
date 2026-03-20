@@ -119,7 +119,39 @@ const Pricing = () => {
   const [activeCategory, setActiveCategory] = useState("retail-service-pos");
   const activeCycle = cycles.find((c) => c.key === cycle)!;
 
-  const calcPrice = (monthly: number) => Math.round(monthly * activeCycle.mult * (1 - activeCycle.discount));
+  const KES_RATE = 130;
+  const currencies = [
+    { key: "usd", label: "USD", symbol: "$" },
+    { key: "kes", label: "KES", symbol: "KSh" },
+  ];
+  const [currency, setCurrency] = useState("usd");
+  const activeCurrency = currencies.find((c) => c.key === currency)!;
+
+  const calcPrice = (monthly: number) => {
+    const base = Math.round(monthly * activeCycle.mult * (1 - activeCycle.discount));
+    return currency === "kes" 
+      ? (base * KES_RATE).toLocaleString() 
+      : base;
+  };
+
+  const calcSetup = (fee: number) => {
+    return currency === "kes"
+      ? (fee * KES_RATE).toLocaleString()
+      : fee;
+  };
+
+  const formatAddonPrice = (usdAmount: number, label: string) => {
+    const amount = currency === "kes" 
+      ? (usdAmount * KES_RATE).toLocaleString() 
+      : usdAmount;
+    return `${label}: ${activeCurrency.symbol}${amount}`;
+  };
+
+  const addons = [
+    { name: "eTIMS Integration", tag: "Compliance", icon: Plug, color: "#2431FF", desc: "Stay KRA-compliant with seamless Kenya Revenue Authority eTIMS integration built right into your workflow.", price: `One-time setup: ${activeCurrency.symbol}${currency === "kes" ? (100 * KES_RATE).toLocaleString() : 100} OR Monthly add-on: ${activeCurrency.symbol}${currency === "kes" ? (10 * KES_RATE).toLocaleString() : 10}/mo` },
+    { name: "M-Pesa & STK Push", tag: "Payments", icon: Smartphone, color: "#10B981", desc: "Accept mobile money payments instantly. Customers get an STK push prompt — no manual reconciliation needed.", price: `One-time setup: ${activeCurrency.symbol}${currency === "kes" ? (40 * KES_RATE).toLocaleString() : 40}` },
+    { name: "Customization", tag: "Bespoke", icon: Wrench, color: "#7C3AED", desc: "Need something unique? We build custom features, workflows, and third-party integrations scoped to your business.", price: `One-time fee: From ${activeCurrency.symbol}${currency === "kes" ? (100 * KES_RATE).toLocaleString() : 100} (scope-dependent)` },
+  ];
 
   const currentCategory = categories.find((c) => c.id === activeCategory)!;
 
@@ -145,7 +177,9 @@ const Pricing = () => {
       {/* Billing toggle */}
       <section className="py-6">
         <div className="container-custom">
-          <div className="mb-4 flex justify-center">
+          <div className="mb-4 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+            
+            {/* Existing billing cycle toggle — unchanged */}
             <div className="inline-flex bg-muted rounded-xl p-1 gap-1 flex-wrap justify-center">
               {cycles.map((c) => (
                 <button
@@ -165,6 +199,24 @@ const Pricing = () => {
                 </button>
               ))}
             </div>
+
+            {/* NEW: Currency toggle */}
+            <div className="inline-flex items-center gap-1 bg-muted rounded-xl p-1">
+              {currencies.map((c) => (
+                <button
+                  key={c.key}
+                  onClick={() => setCurrency(c.key)}
+                  className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+                    currency === c.key
+                      ? "bg-background text-foreground shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  <span>{c.label}</span>
+                </button>
+              ))}
+            </div>
+
           </div>
         </div>
       </section>
@@ -233,10 +285,10 @@ const Pricing = () => {
                       {plan.comingSoon && <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 text-xs font-bold rounded-full bg-yellow-500 text-white">Coming Soon</span>}
                       <h3 className="font-heading font-bold text-lg text-foreground">{plan.name}</h3>
                       <div className="mt-3">
-                        <span className="text-3xl font-heading font-black text-foreground">${calcPrice(plan.monthlyPrice)}</span>
+                        <span className="text-3xl font-heading font-black text-foreground">{activeCurrency.symbol}{calcPrice(plan.monthlyPrice)}</span>
                         <span className="text-sm text-muted-foreground">/{activeCycle.key === "monthly" ? "mo" : activeCycle.label.toLowerCase()}</span>
                       </div>
-                      {plan.setupFee > 0 && <p className="text-xs text-muted-foreground mt-1">Setup fee: ${plan.setupFee}</p>}
+                      {plan.setupFee > 0 && <p className="text-xs text-muted-foreground mt-1">Setup fee: {activeCurrency.symbol}{calcSetup(plan.setupFee)}</p>}
                       <ul className="mt-5 flex-1 space-y-2.5">
                         {plan.features.slice(0, 5).map((f) => (
                           <li key={f} className="flex items-start gap-2 text-sm text-muted-foreground">
@@ -277,11 +329,7 @@ const Pricing = () => {
           </SectionWrapper>
 
           <div className="grid gap-5 md:grid-cols-3">
-            {[
-              { name: "eTIMS Integration", tag: "Compliance", icon: Plug, color: "#2431FF", desc: "Stay KRA-compliant with seamless Kenya Revenue Authority eTIMS integration built right into your workflow.", price: "One-time setup: USD 100 OR Monthly add-on: USD 10/mo" },
-              { name: "M-Pesa & STK Push", tag: "Payments", icon: Smartphone, color: "#10B981", desc: "Accept mobile money payments instantly. Customers get an STK push prompt — no manual reconciliation needed.", price: "One-time setup: USD 40" },
-              { name: "Customization", tag: "Bespoke", icon: Wrench, color: "#7C3AED", desc: "Need something unique? We build custom features, workflows, and third-party integrations scoped to your business.", price: "One-time fee: From USD 100 (scope-dependent)" },
-            ].map((addon, i) => (
+            {addons.map((addon, i) => (
               <SectionWrapper key={addon.name} delay={i * 0.1}>
                 <div className="bg-card border border-border rounded-2xl overflow-hidden h-full">
                   <div className="h-1 w-full" style={{ backgroundColor: addon.color }} />

@@ -6,6 +6,22 @@ const Footer = () => {
 
   return (
     <>
+      {/* Wave curve — sits above the dark footer background on all pages */}
+      <div className="relative w-full overflow-hidden leading-none">
+        <svg
+          viewBox="0 0 1440 80"
+          xmlns="http://www.w3.org/2000/svg"
+          className="block w-full"
+          preserveAspectRatio="none"
+          style={{ height: '80px' }}
+        >
+          <path
+            d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z"
+            fill="#0a1120"
+          />
+        </svg>
+      </div>
+
       <footer className="bg-[#0a1120] text-gray-300 pt-10 pb-12 relative z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">

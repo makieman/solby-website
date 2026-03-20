@@ -4,6 +4,7 @@ import financeImg from "@/assets/features/finance.png";
 import operationsImg from "@/assets/features/operations.jpg";
 import biImg from "@/assets/features/business-intelligence.png";
 import peopleImg from "@/assets/features/people.png";
+import { motion } from "framer-motion";
 
 const groups = [
   {
@@ -59,7 +60,16 @@ const Features = () => (
 
     {/* Feature groups styled with Glassmorphism / Stitch inspiration */}
     {groups.map((group, index) => (
-      <section key={group.title} className={`relative overflow-hidden py-20 ${index % 2 !== 0 ? 'bg-muted/80 dark:bg-muted/40' : 'bg-background'}`}>
+      <section 
+        key={group.title} 
+        className={`relative overflow-hidden py-24 ${index % 2 !== 0 ? 'bg-slate-50 dark:bg-[#0b1222]' : 'bg-white dark:bg-[#0f172a]'}`}
+      >
+        {/* Background Gradients for Depth */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className={`absolute top-1/2 ${index % 2 === 0 ? 'left-1/4' : 'right-1/4'} -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(59,130,246,0.04)_0%,transparent_70%)] blur-[80px]`} />
+          <div className={`absolute top-1/3 ${index % 2 === 0 ? 'right-1/4' : 'left-1/4'} translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(16,185,129,0.03)_0%,transparent_70%)] blur-[60px]`} />
+        </div>
+
         <div className="container-custom relative z-10">
 
           <div className={`mb-16 flex flex-col items-center gap-10 lg:flex-row ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
@@ -82,33 +92,49 @@ const Features = () => (
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             {group.cards.map((card) => (
-              <div
+              <motion.div
                 key={card.name}
-                className="group relative overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                whileHover={{ 
+                  y: -12, 
+                  scale: 1.02,
+                  rotateX: 2,
+                  rotateY: 2,
+                }}
+                className="group relative overflow-hidden rounded-3xl border border-slate-200 dark:border-white/10 bg-white/70 dark:bg-slate-900/50 p-8 shadow-sm backdrop-blur-sm transition-all duration-500 hover:shadow-2xl hover:bg-white dark:hover:bg-slate-900"
+                style={{ perspective: "1000px", transformStyle: "preserve-3d" }}
               >
-                <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-current to-transparent opacity-50 ${card.color}`} />
-                <div className={`absolute top-0 left-0 w-full h-[2px] ${card.bg.replace('/10', '')}`} />
-
-                <div className={`mb-5 flex h-12 w-12 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-105 ${card.bg}`}>
-                  <card.icon className={`w-6 h-6 ${card.color}`} />
+                {/* Accent Line */}
+                <div className={`absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-transparent via-current to-transparent opacity-20 transition-opacity group-hover:opacity-100 ${card.color}`} />
+                
+                <div className={`mb-6 flex h-14 w-14 items-center justify-center rounded-2xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-inner ${card.bg}`}>
+                  <card.icon className={`w-7 h-7 ${card.color}`} />
                 </div>
 
-                <h3 className="mb-3 text-xl font-bold text-foreground">{card.name}</h3>
-                <p className="mb-6 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                <h3 className="mb-4 text-2xl font-bold text-slate-900 dark:text-white transition-colors group-hover:text-primary">{card.name}</h3>
+                <p className="mb-8 text-base leading-relaxed text-slate-600 dark:text-slate-400 group-hover:text-slate-700 dark:group-hover:text-slate-300">
                   {card.desc}
                 </p>
 
-                <ul className="space-y-3">
-                  {card.benefits.slice(0, 3).map((b) => (
-                    <li key={b} className="flex items-center gap-3 text-sm font-medium text-foreground">
-                      <Check className={`h-4 w-4 ${card.color}`} />
-                      {b}
+                <ul className="space-y-4">
+                  {card.benefits.slice(0, 4).map((b) => (
+                    <li key={b} className="flex items-center gap-3 text-sm font-semibold text-slate-700 dark:text-slate-300">
+                      <div className={`flex h-5 w-5 items-center justify-center rounded-full bg-current opacity-10 ${card.color}`}>
+                        <Check className="h-3 w-3 text-white" />
+                      </div>
+                      <span className="group-hover:translate-x-1 transition-transform duration-300">{b}</span>
                     </li>
                   ))}
                 </ul>
-              </div>
+
+                {/* Subtle Glow on Hover */}
+                <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-current opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-[0.08]" 
+                     style={{ color: card.color.split('-')[1] }} />
+              </motion.div>
             ))}
           </div>
 

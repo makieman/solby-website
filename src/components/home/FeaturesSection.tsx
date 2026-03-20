@@ -1,96 +1,128 @@
-import { Settings, Calculator, Brain, Users, ArrowRight, Sparkles } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import {
+  Layers, Calculator, Users, Truck, UtensilsCrossed,
+  BarChart2, Brain, ShoppingCart, FileText, Boxes,
+  DollarSign, Workflow, Globe, HeadphonesIcon, ShieldCheck,
+} from "lucide-react";
+import { Radar, IconContainer } from "@/components/ui/radar-effect";
 import SectionWrapper from "@/components/SectionWrapper";
 
-const features = [
-  {
-    title: "Business Operations",
-    subtitle: "Transform Your",
-    icon: Settings,
-    color: "#2431FF",
-    description: "Streamline your entire business with our comprehensive ERP — from procurement to fulfilment, all in one place.",
-    bullets: ["End-to-end workflow automation", "Real-time inventory tracking", "Multi-branch management"],
-  },
-  {
-    title: "Financial Management",
-    subtitle: "Revolutionize Your",
-    icon: Calculator,
-    color: "#10B981",
-    description: "Advanced accounting tools with real-time financial insights, automated reconciliation, and tax compliance built in.",
-    bullets: ["Automated bank reconciliation", "E-Tims / KRA compliance", "Multi-currency support"],
-  },
-  {
-    title: "AI Analytics & Automation",
-    subtitle: "Supercharge Your",
-    icon: Brain,
-    color: "#2431FF",
-    description: "Smart automation and predictive analytics that surface actionable insights and eliminate repetitive manual work.",
-    bullets: ["Predictive demand forecasting", "Automated report generation", "Anomaly detection alerts"],
-  },
-  {
-    title: "HR & Payroll",
-    subtitle: "Modernize Your",
-    icon: Users,
-    color: "#10B981",
-    description: "Complete human resource management with automated payroll processing, leave tracking, and employee self-service.",
-    bullets: ["One-click payroll processing", "Leave & attendance management", "Employee self-service portal"],
-  },
+/* ── Module definitions ──────────────────────────────────────────── */
+const modules = [
+  /* Row 1 — Core products (link to dedicated pages) */
+  { label: "ERP",            icon: <Layers className="w-6 h-6" />,          color: "#2431FF", href: "/products/erp" },
+  { label: "Accounting",     icon: <Calculator className="w-6 h-6" />,      color: "#10B981", href: "/products/accounting" },
+  { label: "HR & Payroll",   icon: <Users className="w-6 h-6" />,           color: "#7C3AED", href: "/products/hr" },
+  { label: "Supply Chain",   icon: <Truck className="w-6 h-6" />,           color: "#F59E0B", href: "/products/supply-chain" },
+  { label: "Bar & Restaurant", icon: <UtensilsCrossed className="w-6 h-6" />, color: "#EF4444", href: "/products/bar-restaurant" },
+
+  /* Row 2 — Module features */
+  { label: "AI Analytics",   icon: <Brain className="w-6 h-6" />,           color: "#06B6D4", href: "/features" },
+  { label: "Point of Sale",  icon: <ShoppingCart className="w-6 h-6" />,    color: "#8B5CF6", href: "/features" },
+  { label: "Reports",        icon: <BarChart2 className="w-6 h-6" />,       color: "#F97316", href: "/features" },
+  { label: "Inventory",      icon: <Boxes className="w-6 h-6" />,           color: "#0EA5E9", href: "/features" },
+  { label: "Payroll",        icon: <DollarSign className="w-6 h-6" />,      color: "#22C55E", href: "/features" },
+
+  /* Row 3 — Platform capabilities */
+  { label: "Automation",     icon: <Workflow className="w-6 h-6" />,        color: "#A855F7", href: "/features" },
+  { label: "Documents",      icon: <FileText className="w-6 h-6" />,        color: "#64748B", href: "/features" },
+  { label: "Multi-Branch",   icon: <Globe className="w-6 h-6" />,           color: "#2DD4BF", href: "/features" },
+  { label: "Security",       icon: <ShieldCheck className="w-6 h-6" />,     color: "#3B82F6", href: "/features" },
+  { label: "Support 24/7",   icon: <HeadphonesIcon className="w-6 h-6" />,  color: "#EC4899", href: "/contact" },
 ];
 
-const FeaturesSection = () => (
-  <section className="section-padding relative bg-[#f8fafc] dark:bg-[#0f172a] overflow-hidden">
-    {/* Grid pattern and ambient lights */}
-    <div className="absolute inset-0 z-0 pointer-events-none">
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#334155_1px,transparent_1px),linear-gradient(to_bottom,#334155_1px,transparent_1px)] [background-size:40px_40px] opacity-[0.4] dark:opacity-[0.15]"></div>
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-blue-400/20 dark:bg-blue-600/10 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-screen animate-pulse"></div>
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-emerald-400/20 dark:bg-emerald-600/10 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-screen"></div>
-    </div>
+/* ── Section ─────────────────────────────────────────────────────── */
+const FeaturesSection = () => {
+  const navigate = useNavigate();
 
-    <div className="container-custom relative z-10">
-      <div className="relative">
+  return (
+    <section className="section-padding relative bg-[#050d1a] overflow-hidden">
+      {/* ── Background grid ───────────────────────────────────── */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* Fine dot grid */}
+        <div
+          className="absolute inset-0 opacity-[0.15]"
+          style={{
+            backgroundImage: "radial-gradient(circle, rgba(100,116,139,0.6) 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+          }}
+        />
+        {/* Ambient glows */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/5 rounded-full blur-[120px]" />
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-emerald-500/5 rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]" />
+      </div>
+
+      <div className="container-custom relative z-10">
+
+        {/* ── Section header ──────────────────────────────────── */}
         <SectionWrapper className="text-center section-heading-spacing max-w-3xl mx-auto">
-          <span className="text-xs font-semibold tracking-widest uppercase text-primary">Powerful Features</span>
-          <h2 className="heading-lg mt-3 text-foreground">Everything Your Business Needs</h2>
-          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            From operations to finance — Solby gives you the tools to run a smarter business.
+          <span className="text-xs font-semibold tracking-widest uppercase text-primary">
+            Platform Modules
+          </span>
+          <h2 className="heading-lg mt-3 text-white">
+            One Platform.{" "}
+            <span className="gradient-text">Every Tool You Need.</span>
+          </h2>
+          <p className="mt-4 text-slate-400 max-w-xl mx-auto text-sm">
+            Solby's integrated modules work independently or together — pick what
+            your business needs, scale as you grow.
           </p>
         </SectionWrapper>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4 items-stretch">
-          {features.map((f, i) => (
-            <SectionWrapper key={f.title} delay={i * 0.1} className="h-full">
-              <div className="group relative bg-white/95 dark:bg-slate-800/70 backdrop-blur-md rounded-2xl p-6 border border-white/50 dark:border-white/10 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden h-full flex flex-col">
-                <div className="absolute top-0 left-0 w-full h-1 opacity-0 group-hover:opacity-100 transition-opacity" style={{ background: `linear-gradient(to right, ${f.color}80, ${f.color})` }}></div>
-                <div className="flex justify-between items-start mb-4">
-                  <div className="p-2.5 rounded-xl group-hover:scale-110 transition-transform duration-300" style={{ backgroundColor: `${f.color}15`, color: f.color }}>
-                    <f.icon className="w-5 h-5" />
-                  </div>
-                  <span className="text-[11px] font-bold tracking-widest uppercase mt-1" style={{ color: `${f.color}CC` }}>
-                    {f.subtitle}
-                  </span>
-                </div>
-                <h3 className="text-[17px] font-bold text-slate-900 dark:text-white mb-2">{f.title}</h3>
-                <p className="text-[13px] text-slate-600 dark:text-slate-400 mb-4 leading-relaxed flex-1">
-                  {f.description}
-                </p>
-                <ul className="space-y-2 mb-4">
-                  {f.bullets.map((b) => (
-                    <li key={b} className="flex items-center text-[13px] text-slate-600 dark:text-slate-300">
-                      <Sparkles className="w-3.5 h-3.5 mr-2 shrink-0" style={{ color: f.color }} />
-                      {b}
-                    </li>
-                  ))}
-                </ul>
-                <a href="/features" className="inline-flex items-center text-[13px] font-semibold transition-colors group/link mt-auto" style={{ color: f.color }}>
-                  Learn more
-                  <ArrowRight className="w-3.5 h-3.5 ml-1 transform group-hover/link:translate-x-1 transition-transform" />
-                </a>
+        {/* ── Central Radar ───────────────────────────────────── */}
+        <div className="flex justify-center mb-8 mt-4">
+          <div className="relative">
+            {/* Glow ring behind radar */}
+            <div className="absolute inset-0 rounded-full blur-2xl opacity-30 bg-primary/40 scale-110" />
+            <Radar size={260} className="relative z-10" />
+            {/* Floating centre label */}
+            <div className="absolute inset-0 flex items-center justify-center z-20">
+              <div className="mt-8 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+                <span className="text-[11px] font-bold tracking-widest uppercase text-primary">
+                  Solby Platform
+                </span>
               </div>
-            </SectionWrapper>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Icon grid ───────────────────────────────────────── */}
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3 md:gap-4 mt-6">
+          {modules.map((mod, i) => (
+            <IconContainer
+              key={mod.label}
+              icon={mod.icon}
+              label={mod.label}
+              color={mod.color}
+              delay={i * 0.07}
+              onClick={() => navigate(mod.href)}
+            />
           ))}
         </div>
+
+        {/* ── Bottom call-to-action ────────────────────────────── */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5, duration: 0.4 }}
+          className="mt-12 text-center"
+        >
+          <p className="text-sm text-slate-500 mb-4">
+            All modules share one database — no integrations needed.
+          </p>
+          <button
+            onClick={() => navigate("/features")}
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold border border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white transition-colors backdrop-blur-sm"
+          >
+            Explore all features →
+          </button>
+        </motion.div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default FeaturesSection;

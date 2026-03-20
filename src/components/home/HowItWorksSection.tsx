@@ -33,9 +33,9 @@ const HowItWorksSection = () => {
 
   return (
     <section className="section-padding relative bg-[#f8fafc] dark:bg-[#0f172a] overflow-hidden">
-      {/* Seamless grid pattern from previous section */}
+      {/* Seamless grid pattern from previous section - fading in for smooth distinction */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#334155_1px,transparent_1px),linear-gradient(to_bottom,#334155_1px,transparent_1px)] [background-size:40px_40px] opacity-[0.4] dark:opacity-[0.15]"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#334155_1px,transparent_1px),linear-gradient(to_bottom,#334155_1px,transparent_1px)] [background-size:40px_40px] opacity-[0.4] dark:opacity-[0.15] [mask-image:linear-gradient(to_bottom,transparent,black_30%)]"></div>
       </div>
       <div className="container-custom">
         <SectionWrapper className="text-center section-heading-spacing">
