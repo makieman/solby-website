@@ -1,148 +1,353 @@
-import { Calculator, CreditCard, ReceiptText, ShoppingCart, Package, Truck, BarChart3, Brain, FileBarChart, Users, Briefcase, UserCog, Check } from "lucide-react";
-import { WovenLightHero } from "@/components/ui/woven-light-hero";
-import financeImg from "@/assets/features/finance.png";
-import operationsImg from "@/assets/features/operations.jpg";
-import biImg from "@/assets/features/business-intelligence.png";
-import peopleImg from "@/assets/features/people.png";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import { motion, AnimatePresence, useInView } from "framer-motion";
+import {
+  Calculator, CreditCard, ReceiptText, ShoppingCart, Package, Truck,
+  BarChart3, Brain, FileBarChart, Users, Briefcase, UserCog, Check,
+  ArrowRight, Wallet, TrendingUp, Building2, QrCode, Receipt,
+  LineChart, Sparkles, Zap, Shield, Clock, Globe, HeadphonesIcon
+} from "lucide-react";
+import { WovenLightBackground } from "@/components/ui/woven-light-hero";
+import SectionWrapper from "@/components/SectionWrapper";
+import { cn } from "@/lib/utils";
 
-const groups = [
-  {
-    title: "Finance & Accounting",
-    subtitle: "Smart Financial Management",
-    description: "Stay on top of your finances with powerful, compliance-ready accounting tools designed for modern scaling enterprises.",
-    image: financeImg,
-    cards: [
-      { name: "Accounting", icon: Calculator, color: "text-emerald-500", bg: "bg-emerald-500/10", border: "border-t-emerald-500", desc: "Automated bookkeeping, real-time P&L, and compliance tools that keep your finances crystal clear.", benefits: ["General ledger & bookkeeping", "Bank reconciliation", "Balance Sheet & P&L", "Tax-ready reports"] },
-      { name: "Payment Integration", icon: CreditCard, color: "text-blue-500", bg: "bg-blue-500/10", border: "border-t-blue-500", desc: "Accept M-Pesa, Visa, and Mastercard with automatic reconciliation — your customers pay the way they want.", benefits: ["M-Pesa & card support", "Secure processing", "Auto-reconciliation", "Faster settlements"] },
-      { name: "eTIMS & Tax", icon: ReceiptText, color: "text-purple-500", bg: "bg-purple-500/10", border: "border-t-purple-500", desc: "Full KRA compliance with eTIMS e-invoicing, real-time data sync, and accurate VAT calculations.", benefits: ["eTIMS e-invoicing", "KRA data sync", "VAT calculations", "Compliance alerts"] },
-    ],
-  },
-  {
-    title: "Operations",
-    subtitle: "Operational Excellence",
-    description: "Streamline every part of your business operations with smart, integrated tools.",
-    image: operationsImg,
-    cards: [
-      { name: "Sales Management", icon: ShoppingCart, color: "text-green-500", bg: "bg-green-500/10", border: "border-t-green-500", desc: "From the first quote to the final invoice — manage your entire sales cycle in one unified platform.", benefits: ["Quote generation", "Order processing", "Pipeline tracking", "Commission management"] },
-      { name: "Inventory Control", icon: Package, color: "text-indigo-500", bg: "bg-indigo-500/10", border: "border-t-indigo-500", desc: "Real-time tracking with smart reorder automation, multi-location support, and expiry management.", benefits: ["Multi-location tracking", "Auto reorder alerts", "Barcode scanning", "Expiry management"] },
-      { name: "Procurement", icon: Truck, color: "text-amber-500", bg: "bg-amber-500/10", border: "border-t-amber-500", desc: "End-to-end supplier management with automated POs, approval workflows, and contract tracking.", benefits: ["Supplier scoring", "Auto PO generation", "3-way matching", "Contract renewals"] },
-    ],
-  },
-  {
-    title: "Business Intelligence",
-    subtitle: "Data-Driven Decisions",
-    description: "Turn data into actionable insights with powerful analytics and AI tools.",
-    image: biImg,
-    cards: [
-      { name: "Dashboard & BI", icon: BarChart3, color: "text-blue-600", bg: "bg-blue-600/10", border: "border-t-blue-600", desc: "Interactive analytics and KPI tracking that turn raw data into clear, actionable stories.", benefits: ["Visual KPI reports", "Custom dashboards", "Real-time data", "Multi-format export"] },
-      { name: "AI Analytics", icon: Brain, color: "text-violet-500", bg: "bg-violet-500/10", border: "border-t-violet-500", desc: "Predictive insights and smart automation that do the heavy lifting so your team can focus on what matters.", benefits: ["Demand forecasting", "Anomaly detection", "Smart workflows", "Customer insights"] },
-      { name: "Advanced Reporting", icon: FileBarChart, color: "text-fuchsia-500", bg: "bg-fuchsia-500/10", border: "border-t-fuchsia-500", desc: "Scheduled, customizable reports with drill-down analysis — the right data for the right people.", benefits: ["Custom templates", "Scheduled delivery", "Drill-down analysis", "PDF / Excel / CSV"] },
-    ],
-  },
-  {
-    title: "People & Customers",
-    subtitle: "People-First Management",
-    description: "Build stronger teams and deeper customer relationships.",
-    image: peopleImg,
-    cards: [
-      { name: "Customer Management", icon: Users, color: "text-rose-500", bg: "bg-rose-500/10", border: "border-t-rose-500", desc: "Build real relationships — full profiles, interaction history, lead pipeline, and satisfaction tracking.", benefits: ["360° profiles", "Interaction history", "Lead pipeline", "Segmentation"] },
-      { name: "HR & Payroll", icon: Briefcase, color: "text-orange-500", bg: "bg-orange-500/10", border: "border-t-orange-500", desc: "From onboarding to payroll — time tracking, leave management, and performance reviews, all automated.", benefits: ["One-click payroll", "Leave workflows", "Time tracking", "Performance reviews"] },
-      { name: "User Management", icon: UserCog, color: "text-slate-500", bg: "bg-slate-500/10", border: "border-t-slate-500", desc: "Role-based access, MFA, and full audit trails — your data stays secure and accountable.", benefits: ["RBAC system", "MFA support", "Audit trails", "Password policies"] },
-    ],
-  },
+// Simple animated counter component with ease-in
+const AnimatedCounter = ({ value, suffix = "" }: { value: number; suffix?: string }) => {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    const duration = 1500; // 1.5 seconds
+    const steps = 60;
+    const increment = value / steps;
+    let current = 0;
+
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= value) {
+        setCount(value);
+        clearInterval(timer);
+      } else {
+        // Apply ease-in: t^2 curve
+        const progress = current / value;
+        const easedProgress = progress * progress;
+        setCount(Math.floor(value * easedProgress));
+      }
+    }, duration / steps);
+
+    return () => clearInterval(timer);
+  }, [isInView, value]);
+
+  return (
+    <span ref={ref}>
+      {count}{suffix}
+    </span>
+  );
+};
+
+// Feature categories with icons and colors
+const featureCategories = [
+  { id: "finance", label: "Finance", icon: Wallet, color: "#10b981" },
+  { id: "operations", label: "Operations", icon: Package, color: "#3b82f6" },
+  { id: "intelligence", label: "Analytics", icon: Brain, color: "#8b5cf6" },
+  { id: "people", label: "People", icon: Users, color: "#f59e0b" },
+  { id: "hospitality", label: "Hospitality", icon: Receipt, color: "#06b6d4" },
+  { id: "integrations", label: "Integrations", icon: Zap, color: "#ec4899" },
 ];
 
-const Features = () => (
-  <main className="min-h-screen bg-background">
-    {/* Animated Hero using Three.js */}
-    <WovenLightHero />
+// Features data organized by category
+const featuresData: Record<string, Array<{
+  title: string;
+  icon: React.ComponentType<{ className?: string }>;
+  description: string;
+  bullets?: string[];
+}>> = {
+  finance: [
+    {
+      title: "Accounting & Bookkeeping",
+      icon: Calculator,
+      description: "Automated bookkeeping, real-time P&L, and compliance tools that keep your finances crystal clear. Stay on top of your business with accurate financial records.",
+      bullets: ["General ledger & bookkeeping", "Bank reconciliation", "Balance Sheet & P&L", "Tax-ready reports", "Multi-currency support"]
+    },
+    { title: "Payment Integration", icon: CreditCard, description: "Accept M-Pesa, Visa, and Mastercard with automatic reconciliation — your customers pay the way they want.", bullets: ["M-Pesa & card support", "Secure processing", "Auto-reconciliation", "Faster settlements"] },
+    { title: "eTIMS & Tax Compliance", icon: ReceiptText, description: "Full KRA compliance with eTIMS e-invoicing, real-time data sync, and accurate VAT calculations.", bullets: ["eTIMS e-invoicing", "KRA data sync", "VAT calculations", "Compliance alerts"] },
+    { title: "Expense Management", icon: Wallet, description: "Track and categorize business expenses with smart receipt scanning and approval workflows.", bullets: ["Receipt scanning", "Expense categorization", "Approval workflows", "Budget tracking"] },
+    { title: "Financial Reporting", icon: LineChart, description: "Generate comprehensive financial reports with drill-down capabilities and customizable dashboards.", bullets: ["Custom reports", "Real-time analytics", "Export to Excel/PDF", "Scheduled reports"] },
+  ],
+  operations: [
+    {
+      title: "Sales Management",
+      icon: ShoppingCart,
+      description: "From the first quote to the final invoice — manage your entire sales cycle in one unified platform designed for growing businesses.",
+      bullets: ["Quote generation", "Order processing", "Pipeline tracking", "Commission management", "Sales forecasting"]
+    },
+    { title: "Inventory Control", icon: Package, description: "Real-time tracking with smart reorder automation, multi-location support, and expiry management.", bullets: ["Multi-location tracking", "Auto reorder alerts", "Barcode scanning", "Expiry management"] },
+    { title: "Procurement", icon: Truck, description: "End-to-end supplier management with automated POs, approval workflows, and contract tracking.", bullets: ["Supplier scoring", "Auto PO generation", "3-way matching", "Contract renewals"] },
+    { title: "Purchase Orders", icon: Receipt, description: "Create, send, and track purchase orders with automated approval chains and delivery tracking.", bullets: ["PO creation", "Approval workflows", "Delivery tracking", "Vendor communication"] },
+    { title: "Warehouse Management", icon: Building2, description: "Optimize warehouse operations with bin locations, picking lists, and stock movement tracking.", bullets: ["Bin locations", "Picking optimization", "Stock transfers", "Cycle counting"] },
+  ],
+  intelligence: [
+    {
+      title: "AI-Powered Analytics",
+      icon: Brain,
+      description: "Predictive insights and smart automation that do the heavy lifting so your team can focus on what matters. Turn data into decisions.",
+      bullets: ["Demand forecasting", "Anomaly detection", "Smart workflows", "Customer insights", "Predictive alerts"]
+    },
+    { title: "Dashboard & BI", icon: BarChart3, description: "Interactive analytics and KPI tracking that turn raw data into clear, actionable stories.", bullets: ["Visual KPI reports", "Custom dashboards", "Real-time data", "Multi-format export"] },
+    { title: "Advanced Reporting", icon: FileBarChart, description: "Scheduled, customizable reports with drill-down analysis — the right data for the right people.", bullets: ["Custom templates", "Scheduled delivery", "Drill-down analysis", "PDF / Excel / CSV"] },
+    { title: "Performance Metrics", icon: TrendingUp, description: "Track business performance with customizable scorecards and benchmarking tools.", bullets: ["Scorecards", "Benchmarking", "Trend analysis", "Goal tracking"] },
+    { title: "Data Visualization", icon: Sparkles, description: "Beautiful charts and graphs that make complex data easy to understand and share.", bullets: ["Interactive charts", "Custom views", "Export options", "Presentation mode"] },
+  ],
+  people: [
+    {
+      title: "HR & Payroll",
+      icon: Briefcase,
+      description: "From onboarding to payroll — time tracking, leave management, and performance reviews, all automated in one place.",
+      bullets: ["One-click payroll", "Leave workflows", "Time tracking", "Performance reviews", "Employee portal"]
+    },
+    { title: "Customer Management", icon: Users, description: "Build real relationships — full profiles, interaction history, lead pipeline, and satisfaction tracking.", bullets: ["360° profiles", "Interaction history", "Lead pipeline", "Segmentation"] },
+    { title: "User Management", icon: UserCog, description: "Role-based access, MFA, and full audit trails — your data stays secure and accountable.", bullets: ["RBAC system", "MFA support", "Audit trails", "Password policies"] },
+    { title: "Employee Self-Service", icon: Globe, description: "Empower employees with self-service portals for leave requests, payslips, and profile updates.", bullets: ["Leave requests", "Payslip access", "Profile management", "Document uploads"] },
+    { title: "Recruitment", icon: Users, description: "Streamline hiring with applicant tracking, interview scheduling, and onboarding workflows.", bullets: ["Applicant tracking", "Interview scheduling", "Onboarding", "Job postings"] },
+  ],
+  hospitality: [
+    {
+      title: "Restaurant POS",
+      icon: Receipt,
+      description: "Purpose-built for restaurants and cafes — table management, KOT, and split billing handled seamlessly.",
+      bullets: ["Table management", "Kitchen order tickets", "Split billing", "Menu engineering", "Tip handling"]
+    },
+    { title: "Table Reservations", icon: Clock, description: "Manage reservations with online booking, waitlists, and table optimization.", bullets: ["Online booking", "Waitlist management", "Table optimization", "Guest preferences"] },
+    { title: "Menu Management", icon: QrCode, description: "Dynamic menus with pricing control, modifiers, and dietary information tracking.", bullets: ["Dynamic pricing", "Modifiers & addons", "Dietary tags", "QR code menus"] },
+    { title: "Kitchen Display", icon: Zap, description: "Digital kitchen display system for order routing, prep times, and course management.", bullets: ["Order routing", "Prep time tracking", "Course firing", "Item highlighting"] },
+    { title: "Guest Management", icon: Users, description: "Build guest profiles with preferences, visit history, and loyalty tracking.", bullets: ["Guest profiles", "Visit history", "Loyalty tracking", "Special occasions"] },
+  ],
+  integrations: [
+    {
+      title: "eTIMS Integration",
+      icon: Shield,
+      description: "Stay KRA-compliant with seamless Kenya Revenue Authority eTIMS integration built right into your workflow.",
+      bullets: ["Automatic invoicing", "Real-time sync", "VAT compliance", "Audit ready"]
+    },
+    { title: "M-Pesa & STK Push", icon: Zap, description: "Accept mobile money payments instantly. Customers get an STK push prompt — no manual reconciliation needed.", bullets: ["STK push", "Instant confirmation", "Auto reconciliation", "Transaction history"] },
+    { title: "SMS Notifications", icon: HeadphonesIcon, description: "Keep customers informed with automated SMS for orders, payments, and appointments.", bullets: ["Order updates", "Payment confirmations", "Appointment reminders", "Marketing campaigns"] },
+    { title: "Email Integration", icon: Globe, description: "Send professional invoices, quotes, and reports directly from the system.", bullets: ["Email templates", "Bulk sending", "Delivery tracking", "Auto follow-ups"] },
+    { title: "API Access", icon: Sparkles, description: "Build custom integrations with our RESTful API for developers who need more flexibility.", bullets: ["RESTful API", "Webhooks", "Documentation", "SDK support"] },
+  ],
+};
 
-    {/* Feature groups styled with Glassmorphism / Stitch inspiration */}
-    {groups.map((group, index) => (
-      <section 
-        key={group.title} 
-        className={`relative overflow-hidden py-24 ${index % 2 !== 0 ? 'bg-slate-50 dark:bg-[#0b1222]' : 'bg-white dark:bg-[#0f172a]'}`}
-      >
-        {/* Background Gradients for Depth */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className={`absolute top-1/2 ${index % 2 === 0 ? 'left-1/4' : 'right-1/4'} -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(59,130,246,0.04)_0%,transparent_70%)] blur-[80px]`} />
-          <div className={`absolute top-1/3 ${index % 2 === 0 ? 'right-1/4' : 'left-1/4'} translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(16,185,129,0.03)_0%,transparent_70%)] blur-[60px]`} />
+const Features = () => {
+  const [active, setActive] = useState("finance");
+  const activeCategory = featureCategories.find(c => c.id === active)!;
+  const activeFeatures = featuresData[active] || [];
+
+  const [featuredFeature, ...remainingFeatures] = activeFeatures;
+
+  return (
+    <main className="min-h-screen bg-background">
+      {/* HERO SECTION */}
+      <section className="relative pt-32 pb-20 overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0 z-0">
+          <WovenLightBackground className="absolute inset-0 opacity-60" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/70 to-background" />
+          {/* Ambient glows */}
+          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/8 rounded-full blur-[100px] pointer-events-none" />
+          <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-accent/8 rounded-full blur-[80px] pointer-events-none" />
         </div>
 
-        <div className="container-custom relative z-10">
+        <div className="container-custom relative z-10 text-center">
+          <SectionWrapper>
+            {/* Pill badge */}
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20 mb-6">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
+              </span>
+              Everything your business needs
+            </span>
 
-          <div className={`mb-16 flex flex-col items-center gap-10 lg:flex-row ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
-            <div className="lg:w-5/12 text-center lg:text-left">
-              <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">{group.title}</span>
-              <h2 className="mb-5 text-4xl font-extrabold leading-tight text-foreground lg:text-5xl">{group.subtitle}</h2>
-              <p className="max-w-xl mx-auto text-base text-muted-foreground lg:mx-0 lg:text-lg">
-                {group.description}
-              </p>
-            </div>
-            <div className="relative flex justify-center lg:w-7/12">
-              <div className="relative z-20 w-full max-w-[380px] lg:max-w-[430px]">
-                <img
-                  alt={group.title}
-                  className="aspect-[4/3] w-full h-auto rounded-3xl border border-white/10 object-cover shadow-md dark:border-white/5"
-                  src={group.image}
-                />
-              </div>
-              <div className="absolute left-1/2 top-1/2 -z-10 h-[102%] w-[102%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 opacity-25 blur-[34px]" />
-            </div>
-          </div>
+            <h1 className="heading-xl text-foreground mb-4">
+              Powerful Features,<br />
+              <span className="gradient-text">Built for Africa</span>
+            </h1>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
+              From POS to payroll, every tool works together seamlessly so you can focus on growing your business.
+            </p>
 
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-            {group.cards.map((card) => (
-              <motion.div
-                key={card.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                whileHover={{ 
-                  y: -12, 
-                  scale: 1.02,
-                  rotateX: 2,
-                  rotateY: 2,
-                }}
-                className="group relative overflow-hidden rounded-3xl border border-slate-200 dark:border-white/10 bg-white/70 dark:bg-slate-900/50 p-8 shadow-sm backdrop-blur-sm transition-all duration-500 hover:shadow-2xl hover:bg-white dark:hover:bg-slate-900 hover:border-primary/30"
-                style={{ perspective: "1000px", transformStyle: "preserve-3d" }}
-              >
-                {/* Accent Line */}
-                <div className={`absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-transparent via-current to-transparent opacity-20 transition-opacity group-hover:opacity-100 ${card.color}`} />
-                
-                <div className={`mb-6 flex h-14 w-14 items-center justify-center rounded-2xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-inner ${card.bg}`}>
-                  <card.icon className={`w-7 h-7 ${card.color}`} />
+            {/* Stats row */}
+            <div className="flex flex-wrap items-center justify-center gap-8 mt-8">
+              {[
+                { value: 100, label: "Businesses powered", suffix: "+" },
+                { value: 15, label: "Core modules", suffix: "+" },
+                { value: 99, label: "Uptime SLA", suffix: ".9%" },
+                { value: 24, label: "Avg. onboarding", suffix: "h" },
+              ].map((stat) => (
+                <div key={stat.label} className="text-center">
+                  <div className="text-2xl font-heading font-black text-foreground">
+                    <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                  </div>
+                  <div className="text-xs text-muted-foreground mt-0.5">
+                    {stat.label}
+                  </div>
                 </div>
-
-                <h3 className="mb-4 text-2xl font-bold text-slate-900 dark:text-white transition-colors group-hover:text-primary">{card.name}</h3>
-                <p className="mb-8 text-base leading-relaxed text-slate-600 dark:text-slate-400 group-hover:text-slate-700 dark:group-hover:text-slate-300">
-                  {card.desc}
-                </p>
-
-                <ul className="space-y-4">
-                  {card.benefits.slice(0, 4).map((b) => (
-                    <li key={b} className="flex items-center gap-3 text-sm font-semibold text-slate-700 dark:text-slate-300">
-                      <div className={`flex h-5 w-5 items-center justify-center rounded-full bg-current opacity-10 ${card.color}`}>
-                        <Check className="h-3 w-3 text-white" />
-                      </div>
-                      <span className="group-hover:translate-x-1 transition-transform duration-300">{b}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Subtle Glow on Hover */}
-                <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-current opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-[0.08]" 
-                     style={{ color: card.color.split('-')[1] }} />
-              </motion.div>
-            ))}
-          </div>
-
+              ))}
+            </div>
+          </SectionWrapper>
         </div>
       </section>
-    ))}
 
-  </main>
-);
+      {/* CATEGORY TABS */}
+      <div className="sticky top-[72px] z-20 bg-background/90 backdrop-blur-md border-b border-border">
+        <div className="container-custom py-3">
+          <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1">
+            {featureCategories.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setActive(cat.id)}
+                className={cn(
+                  "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium",
+                  "whitespace-nowrap shrink-0 transition-all duration-200 border",
+                  active === cat.id
+                    ? "bg-primary text-primary-foreground border-primary shadow-sm shadow-primary/20"
+                    : "bg-muted/50 text-muted-foreground border-transparent hover:text-foreground hover:bg-muted"
+                )}
+              >
+                <cat.icon className="w-3.5 h-3.5" />
+                {cat.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* FEATURE CARDS */}
+      <section className="py-12 md:py-16">
+        <div className="container-custom">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+            >
+              {/* Featured card — first item */}
+              {featuredFeature && (
+                <SectionWrapper>
+                  <div className="relative rounded-3xl border border-border bg-card overflow-hidden p-8 md:p-10 hover:border-primary/30 transition-all duration-300 group">
+                    {/* Background accent */}
+                    <div
+                      className="absolute top-0 right-0 w-[300px] h-[300px] rounded-full blur-[80px] opacity-10 pointer-events-none"
+                      style={{ backgroundColor: activeCategory.color }}
+                    />
+
+                    {/* Top accent line */}
+                    <div
+                      className="absolute top-0 left-0 right-0 h-[2px] rounded-t-3xl"
+                      style={{ backgroundColor: activeCategory.color }}
+                    />
+
+                    <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-6">
+                      <div className="flex-1">
+                        <div
+                          className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4"
+                          style={{ backgroundColor: `${activeCategory.color}20` }}
+                        >
+                          <featuredFeature.icon className="w-6 h-6" style={{ color: activeCategory.color }} />
+                        </div>
+                        <h3 className="font-heading font-bold text-xl text-foreground mb-2">
+                          {featuredFeature.title}
+                        </h3>
+                        <p className="text-muted-foreground leading-relaxed max-w-lg">
+                          {featuredFeature.description}
+                        </p>
+                        {/* Sub-bullets */}
+                        {featuredFeature.bullets && (
+                          <ul className="mt-4 grid sm:grid-cols-2 gap-2">
+                            {featuredFeature.bullets.map((b) => (
+                              <li key={b} className="flex items-center gap-2 text-sm text-muted-foreground">
+                                <Check className="w-4 h-4 shrink-0" style={{ color: activeCategory.color }} />
+                                {b}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </SectionWrapper>
+              )}
+
+              {/* Remaining cards — 3-column grid */}
+              {remainingFeatures.length > 0 && (
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                  {remainingFeatures.map((feature, i) => (
+                    <SectionWrapper key={feature.title} delay={i * 0.07}>
+                      <div className="relative bg-card border border-border rounded-2xl p-5 h-full hover:border-primary/30 hover:-translate-y-0.5 transition-all duration-300 group overflow-hidden">
+                        {/* Hover glow */}
+                        <div
+                          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                          style={{
+                            background: `radial-gradient(circle at top left, ${activeCategory.color}08, transparent 60%)`
+                          }}
+                        />
+
+                        <div
+                          className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 shrink-0 relative z-10"
+                          style={{ backgroundColor: `${activeCategory.color}15` }}
+                        >
+                          <feature.icon className="w-5 h-5" style={{ color: activeCategory.color }} />
+                        </div>
+                        <h3 className="font-heading font-semibold text-foreground mb-2 relative z-10">
+                          {feature.title}
+                        </h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed relative z-10">
+                          {feature.description}
+                        </p>
+                      </div>
+                    </SectionWrapper>
+                  ))}
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </section>
+
+      {/* BOTTOM CTA */}
+      <section className="py-16 bg-muted/40 border-t border-border">
+        <div className="container-custom text-center">
+          <SectionWrapper>
+            <h2 className="heading-lg text-foreground mb-4">
+              Ready to see it in action?
+            </h2>
+            <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
+              Book a free demo and we&apos;ll walk you through the features most relevant to your business.
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 px-8 py-3 rounded-lg font-semibold bg-primary text-primary-foreground hover:opacity-90 btn-glow group"
+              >
+                Book a Free Demo
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link
+                to="/pricing"
+                className="inline-flex items-center gap-2 px-8 py-3 rounded-lg font-semibold border border-border text-foreground hover:bg-muted transition-colors"
+              >
+                View Pricing
+              </Link>
+            </div>
+          </SectionWrapper>
+        </div>
+      </section>
+    </main>
+  );
+};
 
 export default Features;

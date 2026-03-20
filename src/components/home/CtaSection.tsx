@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
 const CtaSection = () => (
-  <section className="relative bg-gradient-to-br from-[#1a3ee8] via-[#254bec] to-[#3b5bf5] overflow-hidden">
+  <section className="relative mt-8 md:mt-16 bg-gradient-to-br from-[#1a3ee8] via-[#254bec] to-[#3b5bf5] overflow-hidden">
     {/* Animated Waves Background */}
     <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
       <div className="wave-container">
@@ -24,7 +24,7 @@ const CtaSection = () => (
     </div>
 
     {/* Content */}
-    <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center z-10">
+    <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-24 text-center z-10">
       <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight leading-tight drop-shadow-sm">
         Ready to Transform Your Business?
       </h2>

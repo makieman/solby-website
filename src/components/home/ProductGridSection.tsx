@@ -218,11 +218,13 @@ export default function ProductGridSection() {
               return (
                 <motion.div
                   key={product.text}
-                  initial={{ opacity: 0, scale: 0, rotate: -15 }}
+                  initial={{ opacity: 0, scale: 0, rotate: -15, x: "-50%", y: "-50%" }}
                   animate={{
                     opacity: revealed[i] ? 1 : 0,
                     scale: revealed[i] ? 1 : 0,
                     rotate: revealed[i] ? 0 : -15,
+                    x: "-50%",
+                    y: "-50%",
                   }}
                   transition={{
                     type: "spring",
@@ -234,7 +236,6 @@ export default function ProductGridSection() {
                     position: 'absolute',
                     left: cx,
                     top: cy,
-                    transform: 'translate(-50%, -50%)',
                     zIndex: 10,
                   }}
                 >

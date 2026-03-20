@@ -107,12 +107,12 @@ const HeroSection = () => {
                 </span>
               ))}
             </div>
-            
+
             {/* feature badges row */}
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mt-6">
               {featureBadges.map((badge, idx) => (
                 badge.isWhatsApp ? (
-                  <a 
+                  <a
                     key={idx}
                     href="https://wa.me/254100933316"
                     target="_blank"
