@@ -2,6 +2,7 @@ import SectionWrapper from "@/components/SectionWrapper";
 import { Marquee } from "@/components/ui/marquee";
 
 const logos = [
+  { name: "Kim's Photography", url: "/assets/images/Kims-Photography-Logo.png" },
   { name: "Forever Grateful", url: "https://res.cloudinary.com/dzorbbb7s/image/upload/v1748783889/fg_logo_fg-1-removebg-preview_hrmztq.webp" },
   { name: "Bessich Distributors", url: "https://res.cloudinary.com/dzorbbb7s/image/upload/t_bg-remover/v1748885216/bessich-logo_kq6o6u.png" },
   { name: "KENIC", url: "https://res.cloudinary.com/dzorbbb7s/image/upload/v1746453535/kenic-logo_dvkror-removebg-preview_cysox4.png" },

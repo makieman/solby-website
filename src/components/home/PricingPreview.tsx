@@ -43,7 +43,7 @@ const PricingPreview = () => {
   };
 
   return (
-    <section className="section-padding relative">
+    <section className="pt-24 pb-12 relative">
       <div className="container-custom">
         <SectionWrapper className="text-center section-heading-spacing">
           <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase bg-primary/10 text-primary border border-primary/20">Pricing</span>
@@ -54,7 +54,7 @@ const PricingPreview = () => {
         </SectionWrapper>
 
         {/* Cycle toggle */}
-        <div className="flex justify-center mb-6">
+        <div className="flex justify-center mb-10">
           <div className="inline-flex flex-wrap md:flex-nowrap bg-muted rounded-xl p-1 gap-1">
             {cycles.map((c) => (
               <button
@@ -76,7 +76,7 @@ const PricingPreview = () => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-12">
           {plans.map((plan, i) => (
             <SectionWrapper key={plan.name} delay={i * 0.1}>
               <div className={`relative bg-card border rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl h-full flex flex-col ${plan.popular ? "border-primary ring-2 ring-primary/20" : "border-border"

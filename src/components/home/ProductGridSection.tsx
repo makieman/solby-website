@@ -218,19 +218,18 @@ export default function ProductGridSection() {
               return (
                 <motion.div
                   key={product.text}
-                  initial={{ opacity: 0, scale: 0, rotate: -15, x: "-50%", y: "-50%" }}
+                  initial={{ opacity: 0, scale: 0.6, x: "-50%", y: "-50%" }}
                   animate={{
                     opacity: revealed[i] ? 1 : 0,
-                    scale: revealed[i] ? 1 : 0,
-                    rotate: revealed[i] ? 0 : -15,
+                    scale: revealed[i] ? 1 : 0.6,
                     x: "-50%",
                     y: "-50%",
                   }}
                   transition={{
                     type: "spring",
-                    stiffness: 300,
-                    damping: 15,
-                    mass: 0.6,
+                    stiffness: 120,
+                    damping: 20,
+                    mass: 1,
                   }}
                   style={{
                     position: 'absolute',
