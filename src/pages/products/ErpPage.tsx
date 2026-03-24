@@ -1,10 +1,18 @@
 import { Zap, BarChart3, Users, GitBranch, Settings, Package } from "lucide-react";
 import { HiDocumentText } from "react-icons/hi";
 import ProductPage from "./ProductPage";
+import SEO from "@/components/SEO";
 
 export default function ErpPage() {
   return (
-    <ProductPage
+    <>
+      <SEO
+        title="Solby ERP — Enterprise Resource Planning for Africa"
+        description="Run your entire business from one place. Procurement, inventory, sales, finance, and fulfilment. Built for African enterprises from $95/month."
+        keywords="ERP software Kenya, enterprise resource planning Africa, business management Kenya"
+        url="/products/erp"
+      />
+      <ProductPage
       badge="Core Platform"
       tag="eTIMS Ready"
       name="Solby ERP"
@@ -65,5 +73,6 @@ export default function ErpPage() {
       ctaText="Join 800+ businesses already running leaner and growing faster with Solby ERP."
       pricingHref="/pricing"
     />
+    </>
   );
 }

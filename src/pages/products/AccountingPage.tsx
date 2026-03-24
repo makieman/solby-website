@@ -1,10 +1,18 @@
 import { Calculator, BarChart3, FileText, RefreshCw, Globe, TrendingUp } from "lucide-react";
 import { AiFillDollarCircle } from "react-icons/ai";
 import ProductPage from "./ProductPage";
+import SEO from "@/components/SEO";
 
 export default function AccountingPage() {
   return (
-    <ProductPage
+    <>
+      <SEO
+        title="Solby Accounting — Financial Management Software Kenya"
+        description="Accounting software with eTIMS integration for Kenyan businesses. Invoices, bank reconciliation, tax-ready reports, and financial statements."
+        keywords="accounting software Kenya, eTIMS integration, tax software Kenya"
+        url="/products/accounting"
+      />
+      <ProductPage
       badge="Finance Module"
       tag="KRA eTIMS Ready"
       name="Solby Accounting"
@@ -65,5 +73,6 @@ export default function AccountingPage() {
       ctaText="Stop wrestling with spreadsheets. Solby Accounting keeps your finances clean, compliant, and always audit-ready."
       pricingHref="/pricing"
     />
+    </>
   );
 }

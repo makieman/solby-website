@@ -10,6 +10,7 @@ import {
 import { WovenLightBackground } from "@/components/ui/woven-light-hero";
 import SectionWrapper from "@/components/SectionWrapper";
 import { cn } from "@/lib/utils";
+import SEO from "@/components/SEO";
 
 // Simple animated counter component with ease-in
 const AnimatedCounter = ({ value, suffix = "" }: { value: number; suffix?: string }) => {
@@ -148,6 +149,12 @@ const Features = () => {
 
   return (
     <main className="min-h-screen bg-background">
+      <SEO
+        title="Features — Everything Your Business Needs"
+        description="Explore Solby's complete feature set: POS, inventory, accounting, HR & payroll, CRM, hospitality management, and real-time analytics for African businesses."
+        keywords="ERP features Kenya, POS features Africa, inventory management, HR software Kenya"
+        url="/features"
+      />
       {/* HERO SECTION */}
       <section className="relative pt-32 pb-20 overflow-hidden">
         {/* Background */}

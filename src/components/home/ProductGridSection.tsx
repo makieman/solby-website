@@ -73,7 +73,7 @@ export default function ProductGridSection() {
       text: "Solby Multibranch", 
       desc: "Manage all locations from one dashboard",
       icon: <HiOutlineOfficeBuilding className="h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8" />, 
-      href: "/features",          
+      href: "/products/multibranch",          
       color: "#06b6d4", 
       angle: 90  
     },

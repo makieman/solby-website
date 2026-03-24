@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Check, ArrowRight, Plug, Smartphone, Wrench, HelpCircle } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import { WovenLightBackground } from "@/components/ui/woven-light-hero";
+import SEO from "@/components/SEO";
 
 const cycles = [
   { key: "monthly", label: "Monthly", mult: 1, discount: 0 },
@@ -157,6 +158,12 @@ const Pricing = () => {
 
   return (
     <>
+      <SEO
+        title="Pricing — Flexible Plans for Every Business"
+        description="Simple, transparent pricing from $20/month. Retail, hospitality, accounting, HR, and ERP plans. 14-day free trial, no credit card required."
+        keywords="ERP pricing Kenya, business software price, affordable POS Kenya"
+        url="/pricing"
+      />
       {/* Hero */}
       <section className="relative flex h-[54vh] min-h-[400px] w-full items-center justify-center overflow-hidden bg-background">
         <WovenLightBackground />

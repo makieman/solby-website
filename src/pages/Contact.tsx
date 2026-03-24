@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import SectionWrapper from "@/components/SectionWrapper";
 import { WovenLightBackground } from "@/components/ui/woven-light-hero";
+import SEO from "@/components/SEO";
 
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
@@ -21,19 +22,46 @@ const Contact = () => {
     return Object.keys(e).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
     setLoading(true);
-    setTimeout(() => {
-      toast.success("Thank you! Your message has been sent.");
-      setForm({ name: "", email: "", subject: "", message: "" });
+
+    try {
+      const response = await fetch("https://formspree.io/f/info@solby.io", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          subject: form.subject,
+          message: form.message,
+        }),
+      });
+
+      if (response.ok) {
+        toast.success("Thank you! Your message has been sent.");
+        setForm({ name: "", email: "", subject: "", message: "" });
+      } else {
+        toast.error("Something went wrong. Please try calling us directly.");
+      }
+    } catch (error) {
+      toast.error("Network error. Please try calling us directly.");
+    } finally {
       setLoading(false);
-    }, 1500);
+    }
   };
 
   return (
     <>
+      <SEO
+        title="Contact Us — Get in Touch"
+        description="Contact Solby for a free demo, pricing, or support. Based in Eldoret, Kenya. Call +254 115 588872 or email info@solby.io."
+        url="/contact"
+      />
       <section className="relative pt-32 pb-20 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <WovenLightBackground className="absolute inset-0 opacity-80" overlayClassName="absolute top-0 right-0 h-full w-1/2 opacity-20 pointer-events-none" />
@@ -141,7 +169,7 @@ const Contact = () => {
               <div className="mt-8 rounded-xl overflow-hidden border border-border h-64 bg-muted flex items-center justify-center">
                 <div className="text-center">
                   <MapPin className="w-8 h-8 text-primary mx-auto mb-2" />
-                  <p className="text-sm text-muted-foreground">Nairobi, Kenya</p>
+                  <p className="text-sm text-muted-foreground">Eldoret, Kenya</p>
                 </div>
               </div>
             </SectionWrapper>

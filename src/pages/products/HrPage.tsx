@@ -1,10 +1,18 @@
 import { Users, DollarSign, FileText, Calendar, BarChart3, Shield } from "lucide-react";
 import { BsClipboardDataFill } from "react-icons/bs";
 import ProductPage from "./ProductPage";
+import SEO from "@/components/SEO";
 
 export default function HrPage() {
   return (
-    <ProductPage
+    <>
+      <SEO
+        title="Solby HR — Payroll & HR Management Software Kenya"
+        description="Automate payroll with PAYE, NHIF, NSSF, and Housing Levy compliance. Complete HR management for Kenyan businesses."
+        keywords="payroll software Kenya, HR management Africa, PAYE calculator Kenya"
+        url="/products/hr"
+      />
+      <ProductPage
       badge="HR & Payroll"
       tag="Statutory Compliant"
       name="Solby HR"
@@ -65,5 +73,6 @@ export default function HrPage() {
       ctaText="Stop running payroll manually. Solby HR keeps your team paid on time, your deductions accurate, and your compliance bulletproof."
       pricingHref="/pricing"
     />
+    </>
   );
 }

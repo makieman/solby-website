@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import SectionWrapper from "@/components/SectionWrapper";
 import { WovenLightBackground } from "@/components/ui/woven-light-hero";
+import SEO from "@/components/SEO";
 
 const coreSolutions = [
   {
@@ -84,6 +85,11 @@ const industries = [
 
 const Industries = () => (
   <>
+    <SEO
+      title="Industries — Built for Your Sector"
+      description="Solby serves retail, hospitality, manufacturing, healthcare, NGOs and more. Industry-specific solutions built for African businesses."
+      url="/industries"
+    />
     {/* Hero - Match Features page woven treatment */}
     <section className="relative flex h-[54vh] min-h-[400px] w-full items-center justify-center overflow-hidden bg-background">
       <WovenLightBackground />

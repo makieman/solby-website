@@ -1,8 +1,10 @@
 import SectionWrapper from "@/components/SectionWrapper";
 import { WovenLightBackground } from "@/components/ui/woven-light-hero";
+import SEO from "@/components/SEO";
 
 const PrivacyPolicy = () => (
   <>
+    <SEO title="Privacy Policy" url="/privacy" noIndex={true} />
     <section className="relative pt-32 pb-16 overflow-hidden">
       <div className="absolute inset-0 z-0">
         <WovenLightBackground className="absolute inset-0 opacity-75" overlayClassName="absolute top-0 right-0 h-full w-1/2 opacity-15 pointer-events-none" />

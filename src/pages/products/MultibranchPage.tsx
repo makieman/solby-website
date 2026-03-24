@@ -1,10 +1,18 @@
 import { LayoutDashboard, GitBranch, BarChart3, ArrowLeftRight, Users, RefreshCw } from "lucide-react";
 import { HiOutlineOfficeBuilding } from "react-icons/hi";
 import ProductPage from "./ProductPage";
+import SEO from "@/components/SEO";
 
 export default function MultibranchPage() {
   return (
-    <ProductPage
+    <>
+      <SEO
+        title="Solby Multibranch — Multi-Location Business Management"
+        description="Manage all your business locations from one dashboard. Centralized reporting, inter-branch transfers, and real-time sync for retail chains."
+        keywords="multi-branch management Kenya, franchise software Africa, retail chain POS"
+        url="/products/multibranch"
+      />
+      <ProductPage
       badge="Enterprise"
       tag="Centralized Control"
       name="Solby Multibranch"
@@ -65,5 +73,6 @@ export default function MultibranchPage() {
       ctaText="Stop managing branches with spreadsheets and WhatsApp groups. Solby Multibranch gives you real control across every location."
       pricingHref="/pricing"
     />
+    </>
   );
 }

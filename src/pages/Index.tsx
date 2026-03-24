@@ -5,9 +5,15 @@ import ClientLogosSection from "@/components/home/ClientLogosSection";
 import TestimonialSlider from "@/components/home/TestimonialSlider";
 import PricingPreview from "@/components/home/PricingPreview";
 import { CTASection } from "@/components/ui/cta-with-rectangle";
+import SEO from "@/components/SEO";
 
 const Index = () => (
   <>
+    <SEO
+      title="Business Software Built for Africa"
+      description="Solby helps African businesses run operations, finance, analytics, and people in one platform. ERP, POS, Accounting, HR & Payroll."
+      url="/"
+    />
     <HeroSection />
     <ProductGridSection />
     <HowItWorksSection />

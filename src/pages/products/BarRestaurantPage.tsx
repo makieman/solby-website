@@ -1,10 +1,18 @@
 import { UtensilsCrossed, ClipboardList, ChefHat, Clock, BarChart3, DollarSign } from "lucide-react";
 import { BiSolidReport } from "react-icons/bi";
 import ProductPage from "./ProductPage";
+import SEO from "@/components/SEO";
 
 export default function BarRestaurantPage() {
   return (
-    <ProductPage
+    <>
+      <SEO
+        title="Solby Bar & Restaurant — Hospitality Management Software"
+        description="POS and management system for restaurants, bars, cafes, and hotels in Africa. Table management, kitchen tickets, menu engineering."
+        keywords="restaurant POS Kenya, bar management software Africa, hospitality software"
+        url="/products/bar-restaurant"
+      />
+      <ProductPage
       badge="Hospitality"
       tag="Multi-outlet"
       name="Solby Bar & Restaurant"
@@ -65,5 +73,6 @@ export default function BarRestaurantPage() {
       ctaText="Reduce order errors, speed up service, and get real-time visibility into your most important metrics — all from one platform."
       pricingHref="/pricing"
     />
+    </>
   );
 }

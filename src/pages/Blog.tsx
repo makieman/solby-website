@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Clock, User } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import { WovenLightBackground } from "@/components/ui/woven-light-hero";
+import SEO from "@/components/SEO";
 
 const posts = [
   {
@@ -44,6 +45,12 @@ const posts = [
 
 const Blog = () => (
   <>
+    <SEO
+      title="Blog — Business Tips & Updates"
+      description="Tips, guides, and news to help grow your business. ERP, eTIMS compliance, payroll automation, POS systems, and more."
+      url="/blog"
+      type="article"
+    />
     <section className="relative pt-32 pb-20 overflow-hidden min-h-[40vh] flex items-center">
       {/* Background */}
       <div className="absolute inset-0 z-0">

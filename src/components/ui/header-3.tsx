@@ -119,7 +119,7 @@ const products = [
     text: 'Solby Multibranch',
     desc: 'Manage all locations from one dashboard',
     icon: <HiOutlineOfficeBuilding className="h-5 w-5" />,
-    href: '/features',
+    href: '/products/multibranch',
     color: '#06b6d4',
   },
 ];
@@ -130,7 +130,7 @@ const productLinks: LinkItem[] = [
   { title: 'Solby HR', to: '/products/hr', icon: BsClipboardDataFill, description: 'Payroll & staff' },
   { title: 'Solby Supply Chain', to: '/products/supply-chain', icon: HiMiniDocumentArrowUp, description: 'Stock & procurement' },
   { title: 'Solby Bar & Restaurant', to: '/products/bar-restaurant', icon: BiSolidReport, description: 'Orders & kitchen' },
-  { title: 'Solby Multibranch', to: '/features', icon: HiOutlineOfficeBuilding, description: 'All locations' },
+  { title: 'Solby Multibranch', to: '/products/multibranch', icon: HiOutlineOfficeBuilding, description: 'All locations' },
 ];
 
 const ProductsMegaMenu = ({ open, onClose }: { open: boolean; onClose: () => void }) => (
@@ -332,19 +332,19 @@ export function Header() {
               <p className="text-sm font-semibold text-foreground">Navigation</p>
               <p className="text-xs text-muted-foreground">Explore Solby products, company info, and support pages.</p>
             </div>
-            <Button size="icon" variant="ghost" className="rounded-full" onClick={() => setOpen(false)}>
+            <Button size="icon" variant="ghost" className="rounded-full shrink-0 ml-4" onClick={() => setOpen(false)}>
               <MenuToggleIcon open={true} className="size-5" duration={300} />
             </Button>
           </div>
 
           <div className="space-y-6">
-            <MenuGroup title="Products" items={productLinks} pathname={location.pathname} compact />
+            <MenuGroup title="Products" items={productLinks} pathname={location.pathname} compact expandable defaultExpanded={false} />
             <MenuGroup title="Main" items={mainLinks} pathname={location.pathname} compact />
             <MenuGroup title="Company" items={companyLinks} pathname={location.pathname} />
             <MenuGroup title="Policies" items={policyLinks} pathname={location.pathname} compact />
           </div>
 
-          <div className="mt-6">
+          <div className="mt-8 pb-4">
             <Button asChild className="w-full rounded-full">
               <Link to="/contact">Get Started</Link>
             </Button>
@@ -361,27 +361,30 @@ type MobileMenuProps = {
 };
 
 function MobileMenu({ open, children }: MobileMenuProps) {
-  if (!open || typeof window === 'undefined') return null;
+  if (typeof window === 'undefined') return null;
 
   return createPortal(
     <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 z-40 bg-background/45 px-4 pt-24 backdrop-blur-md lg:hidden"
-      >
+      {open && (
         <motion.div
-          id="mobile-menu"
-          initial={{ y: -18, opacity: 0, scale: 0.98 }}
-          animate={{ y: 0, opacity: 1, scale: 1 }}
-          exit={{ y: -12, opacity: 0, scale: 0.98 }}
-          transition={{ duration: 0.25, ease: 'easeOut' }}
-          className="mx-auto max-w-xl"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-40 bg-background/45 px-4 pt-20 pb-6 backdrop-blur-md lg:hidden overflow-y-auto overscroll-contain"
+          style={{ WebkitOverflowScrolling: 'touch' }}
         >
-          {children}
+          <motion.div
+            id="mobile-menu"
+            initial={{ y: -18, opacity: 0, scale: 0.98 }}
+            animate={{ y: 0, opacity: 1, scale: 1 }}
+            exit={{ y: -12, opacity: 0, scale: 0.98 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            className="mx-auto max-w-xl pb-10"
+          >
+            {children}
+          </motion.div>
         </motion.div>
-      </motion.div>
+      )}
     </AnimatePresence>,
     document.body,
   );
@@ -392,35 +395,61 @@ function MenuGroup({
   items,
   pathname,
   compact = false,
+  expandable = false,
+  defaultExpanded = true,
 }: {
   title: string;
   items: LinkItem[];
   pathname: string;
   compact?: boolean;
+  expandable?: boolean;
+  defaultExpanded?: boolean;
 }) {
+  const [isExpanded, setIsExpanded] = React.useState(defaultExpanded);
+
   return (
     <div>
-      <p className="mb-2 px-1 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">{title}</p>
-      <div className="space-y-2">
-        {items.map((item) => (
-          <Link
-            key={item.title}
-            to={item.to}
-            className={cn(
-              'flex items-center gap-3 rounded-2xl border border-transparent px-3 py-3 transition-colors hover:border-border/60 hover:bg-accent/60',
-              matchesPath(pathname, item.to) && 'border-border/70 bg-accent/70',
-            )}
-          >
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-              <item.icon className="h-4 w-4" />
-            </div>
-            <div className="min-w-0">
-              <div className="text-sm font-medium text-foreground">{item.title}</div>
-              {!compact && item.description ? <div className="text-xs text-muted-foreground">{item.description}</div> : null}
-            </div>
-          </Link>
-        ))}
+      <div 
+        className={cn("mb-2 px-1 flex items-center justify-between text-muted-foreground", expandable && "cursor-pointer hover:text-foreground transition-colors")}
+        onClick={() => expandable && setIsExpanded(!isExpanded)}
+      >
+        <p className="text-xs font-semibold uppercase tracking-[0.18em]">{title}</p>
+        {expandable && (
+          <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", isExpanded && "rotate-180")} />
+        )}
       </div>
+      <AnimatePresence initial={false}>
+        {(!expandable || isExpanded) && (
+          <motion.div
+            initial={expandable ? { height: 0, opacity: 0 } : undefined}
+            animate={expandable ? { height: 'auto', opacity: 1 } : undefined}
+            exit={expandable ? { height: 0, opacity: 0 } : undefined}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden"
+          >
+            <div className="space-y-2 pt-1">
+              {items.map((item) => (
+                <Link
+                  key={item.title}
+                  to={item.to}
+                  className={cn(
+                    'flex items-center gap-3 rounded-2xl border border-transparent px-3 py-3 transition-colors hover:border-border/60 hover:bg-accent/60',
+                    matchesPath(pathname, item.to) && 'border-border/70 bg-accent/70',
+                  )}
+                >
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                    <item.icon className="h-4 w-4" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-sm font-medium text-foreground">{item.title}</div>
+                    {!compact && item.description ? <div className="text-xs text-muted-foreground">{item.description}</div> : null}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Facebook, Twitter, Linkedin, Instagram, Mail, Phone, MapPin, ArrowUp, MessageCircle } from "lucide-react";
+import { Linkedin, Instagram, Mail, Phone, MapPin, ArrowUp, MessageCircle } from "lucide-react";
 
 const Footer = () => {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
@@ -39,18 +39,16 @@ const Footer = () => {
               </p>
               <div className="flex space-x-4 pt-2">
                 {[
-                  { icon: Facebook, href: "#" },
-                  { icon: Twitter, href: "#" },
-                  { icon: Linkedin, href: "https://www.linkedin.com/company/solby-erp/" },
-                  { icon: Instagram, href: "https://www.instagram.com/solby.io" },
-                ].map(({ icon: Icon, href }, i) => (
+                  { icon: Linkedin, href: "https://www.linkedin.com/company/solby-erp/", label: "LinkedIn" },
+                  { icon: Instagram, href: "https://www.instagram.com/solby.io", label: "Instagram" },
+                ].map(({ icon: Icon, href, label }, i) => (
                   <a
                     key={i}
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-[#1a3ee8] hover:text-white transition-all duration-300 group hover:-translate-y-1"
-                    aria-label={Icon.displayName}
+                    aria-label={label}
                   >
                     <Icon className="w-4 h-4 group-hover:scale-110 transition-transform" />
                   </a>
@@ -86,8 +84,6 @@ const Footer = () => {
                   { name: "Privacy Policy", href: "/privacy" },
                   { name: "Terms of Service", href: "/terms" },
                   { name: "Cookie Policy", href: "/cookies" },
-                  { name: "Security", href: "/security" },
-                  { name: "GDPR Compliance", href: "/gdpr" },
                 ].map((link) => (
                   <li key={link.name}>
                     <Link to={link.href} className="hover:text-[#1a3ee8] transition-colors block py-1 hover:translate-x-1 duration-200">
@@ -122,11 +118,11 @@ const Footer = () => {
           </div>
 
           <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
-            <p>© 2025 Solby. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Solby. All rights reserved.</p>
             <div className="flex space-x-6">
               <Link to="/privacy" className="hover:text-gray-300 transition-colors">Privacy</Link>
               <Link to="/terms" className="hover:text-gray-300 transition-colors">Terms</Link>
-              <Link to="/sitemap" className="hover:text-gray-300 transition-colors">Sitemap</Link>
+              <Link to="/cookies" className="hover:text-gray-300 transition-colors">Cookies</Link>
             </div>
           </div>
         </div>

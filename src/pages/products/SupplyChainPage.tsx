@@ -1,10 +1,18 @@
 import { Truck, Package, Bell, FileCheck, DollarSign, RefreshCw } from "lucide-react";
 import { HiMiniDocumentArrowUp } from "react-icons/hi2";
 import ProductPage from "./ProductPage";
+import SEO from "@/components/SEO";
 
 export default function SupplyChainPage() {
   return (
-    <ProductPage
+    <>
+      <SEO
+        title="Solby Supply Chain — Inventory & Procurement Software"
+        description="Manage stock, suppliers, and procurement in one platform. Real-time inventory tracking and automated reorders for African businesses."
+        keywords="inventory management Kenya, supply chain software Africa, procurement software"
+        url="/products/supply-chain"
+      />
+      <ProductPage
       badge="Supply Chain"
       tag="Multi-warehouse"
       name="Solby Supply Chain"
@@ -65,5 +73,6 @@ export default function SupplyChainPage() {
       ctaText="Eliminate stockouts and excess inventory. Solby Supply Chain gives you the control to run a lean, efficient operation."
       pricingHref="/pricing"
     />
+    </>
   );
 }
