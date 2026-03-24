@@ -13,7 +13,7 @@ const Footer = () => {
           xmlns="http://www.w3.org/2000/svg"
           className="block w-full"
           preserveAspectRatio="none"
-          style={{ height: '80px' }}
+          style={{ height: '40px' }}
         >
           <path
             d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z"
@@ -22,11 +22,11 @@ const Footer = () => {
         </svg>
       </div>
 
-      <footer className="bg-[#0a1120] text-gray-300 pt-10 pb-12 relative z-30">
+      <footer className="bg-[#0a1120] text-gray-300 pt-5 pb-6 relative z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-4 mb-8">
             {/* Company Info */}
-            <div className="lg:col-span-5 space-y-6">
+            <div className="lg:col-span-5 space-y-3">
               <Link to="/" className="flex items-center gap-2 text-white">
                 <img
                   src="https://res.cloudinary.com/dzorbbb7s/image/upload/v1760597632/Solby_Logo_rzhueo.png"
@@ -57,9 +57,9 @@ const Footer = () => {
             </div>
 
             {/* Quick Links */}
-            <div className="lg:col-span-2 space-y-6">
+            <div className="lg:col-span-2 space-y-3">
               <h3 className="text-white font-semibold text-lg tracking-wide">Quick Links</h3>
-              <ul className="space-y-3 text-sm">
+              <ul className="space-y-1.5 text-sm">
                 {[
                   { name: "Features", href: "/features" },
                   { name: "Pricing", href: "/pricing" },
@@ -77,9 +77,9 @@ const Footer = () => {
             </div>
 
             {/* Legal */}
-            <div className="lg:col-span-2 space-y-6">
+            <div className="lg:col-span-2 space-y-3">
               <h3 className="text-white font-semibold text-lg tracking-wide">Legal</h3>
-              <ul className="space-y-3 text-sm">
+              <ul className="space-y-1.5 text-sm">
                 {[
                   { name: "Privacy Policy", href: "/privacy" },
                   { name: "Terms of Service", href: "/terms" },
@@ -95,9 +95,9 @@ const Footer = () => {
             </div>
 
             {/* Contact */}
-            <div className="lg:col-span-3 space-y-6">
+            <div className="lg:col-span-3 space-y-3">
               <h3 className="text-white font-semibold text-lg tracking-wide">Contact</h3>
-              <ul className="space-y-4 text-sm">
+              <ul className="space-y-2 text-sm">
                 <li className="flex items-start gap-3 group">
                   <Mail className="w-5 h-5 mt-0.5 text-[#1a3ee8] group-hover:text-blue-400 transition-colors shrink-0" />
                   <a href="mailto:info@solby.io" className="hover:text-white transition-colors">info@solby.io</a>
@@ -117,7 +117,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+          <div className="border-t border-gray-800 pt-4 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
             <p>© {new Date().getFullYear()} Solby. All rights reserved.</p>
             <div className="flex space-x-6">
               <Link to="/privacy" className="hover:text-gray-300 transition-colors">Privacy</Link>

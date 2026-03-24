@@ -1,7 +1,62 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Check } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { useInView, useMotionValue, useSpring } from "framer-motion";
 import SectionWrapper from "@/components/SectionWrapper";
 import { WovenLightBackground } from "@/components/ui/woven-light-hero";
+
+const AnimatedStat = ({ value }: { value: string }) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  
+  // Parse prefix, number, logic for integer/float and suffix
+  const match = value.match(/^([\D]*?)([\d,]+(?:\.\d+)?)([\D]*)$/);
+  
+  if (!match) return <span>{value}</span>;
+  
+  const prefix = match[1];
+  const numRaw = match[2].replace(/,/g, '');
+  const num = parseFloat(numRaw);
+  const suffix = match[3];
+  
+  if (isNaN(num)) return <span>{value}</span>;
+  
+  const isFloat = numRaw.includes('.');
+  const decimals = isFloat ? numRaw.split('.')[1].length : 0;
+  
+  const motionValue = useMotionValue(0);
+  const springValue = useSpring(motionValue, {
+    damping: 30,
+    stiffness: 70,
+    mass: 0.8
+  });
+
+  useEffect(() => {
+    if (isInView) {
+      motionValue.set(num);
+    }
+  }, [isInView, num, motionValue]);
+
+  useEffect(() => {
+    return springValue.on("change", (latest) => {
+      if (ref.current) {
+        // format with commas if it was an int, or just fixed decimals
+        let formatted = latest.toFixed(decimals);
+        if (!isFloat && num >= 1000) {
+          formatted = Math.floor(latest).toLocaleString('en-US');
+        }
+        ref.current.textContent = `${prefix}${formatted}${suffix}`;
+      }
+    });
+  }, [springValue, prefix, suffix, decimals, isFloat, num]);
+
+  return (
+    <span ref={ref}>
+      {prefix}0{isFloat ? ".".padEnd(decimals + 1, "0") : ""}{suffix}
+    </span>
+  );
+};
+
 
 interface Feature {
   title: string;
@@ -109,7 +164,9 @@ const ProductPage = (props: ProductPageProps) => {
           <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto text-center">
             {props.stats.map((stat, i) => (
               <SectionWrapper key={stat.label} delay={i * 0.08}>
-                <div className="text-3xl font-black text-foreground">{stat.value}</div>
+                <div className="text-3xl font-black text-foreground">
+                  <AnimatedStat value={stat.value} />
+                </div>
                 <div className="text-sm text-muted-foreground mt-1">{stat.label}</div>
               </SectionWrapper>
             ))}
